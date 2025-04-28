@@ -1,6 +1,9 @@
 name: "bidi2pdf_demo"
 
 services:
+  remote-chrome:
+    image: dieters877565/chromedriver:latest
+
   rails-app:
     build:
       context: ..
