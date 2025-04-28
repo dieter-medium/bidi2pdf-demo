@@ -1,3 +1,27 @@
+GIT
+  remote: https://github.com/dieter-medium/bidi2pdf-rails.git
+  revision: d93d4ee10e0b65d58643c57356adf8162a849b18
+  branch: main
+  specs:
+    bidi2pdf-rails (0.1.1)
+      bidi2pdf (>= 0.1.8)
+      rails (>= 7.2.2.1, < 8.0.3.0)
+
+GIT
+  remote: https://github.com/dieter-medium/bidi2pdf.git
+  revision: 68c7bae09aa9d8cd361e22b4d087002182690dfb
+  branch: main
+  specs:
+    bidi2pdf (0.1.8)
+      base64 (~> 0.2.0)
+      chromedriver-binary
+      concurrent-ruby (~> 1.0, >= 1.3.1)
+      json (~> 2.10)
+      rubyzip (~> 2.4)
+      sys-proctable (~> 1.3)
+      thor (~> 1.3)
+      websocket-client-simple (~> 0.9.0)
+
 GEM
   remote: https://rubygems.org/
   specs:
@@ -83,6 +107,8 @@ GEM
     brakeman (7.0.2)
       racc
     builder (3.3.0)
+    chromedriver-binary (0.1.2)
+      rubyzip (~> 2.4)
     concurrent-ruby (1.3.5)
     connection_pool (2.5.2)
     crass (1.0.6)
@@ -96,6 +122,14 @@ GEM
     erubi (1.13.1)
     et-orbi (1.2.11)
       tzinfo
+    event_emitter (0.2.6)
+    ffi (1.17.2-aarch64-linux-gnu)
+    ffi (1.17.2-aarch64-linux-musl)
+    ffi (1.17.2-arm-linux-gnu)
+    ffi (1.17.2-arm-linux-musl)
+    ffi (1.17.2-x86_64-darwin)
+    ffi (1.17.2-x86_64-linux-gnu)
+    ffi (1.17.2-x86_64-linux-musl)
     fugit (1.11.1)
       et-orbi (~> 1, >= 1.2.11)
       raabro (~> 1.4)
@@ -142,6 +176,7 @@ GEM
     mini_mime (1.1.5)
     minitest (5.25.5)
     msgpack (1.8.0)
+    mutex_m (0.3.0)
     net-imap (0.5.7)
       date
       net-protocol
@@ -265,6 +300,7 @@ GEM
       rubocop-performance (>= 1.24)
       rubocop-rails (>= 2.30)
     ruby-progressbar (1.13.0)
+    rubyzip (2.4.1)
     securerandom (0.4.1)
     solid_cable (3.0.7)
       actioncable (>= 7.2)
@@ -299,6 +335,8 @@ GEM
     stimulus-rails (1.3.4)
       railties (>= 6.0.0)
     stringio (3.1.7)
+    sys-proctable (1.3.0)
+      ffi (~> 1.1)
     thor (1.3.2)
     thruster (0.1.13)
     thruster (0.1.13-aarch64-linux)
@@ -320,10 +358,17 @@ GEM
       activemodel (>= 6.0.0)
       bindex (>= 0.4.0)
       railties (>= 6.0.0)
+    websocket (1.2.11)
+    websocket-client-simple (0.9.0)
+      base64
+      event_emitter
+      mutex_m
+      websocket
     websocket-driver (0.7.7)
       base64
       websocket-extensions (>= 0.1.0)
     websocket-extensions (0.1.5)
+    websocket-native (1.0.0)
     zeitwerk (2.7.2)
 
 PLATFORMS
@@ -338,6 +383,8 @@ PLATFORMS
   x86_64-linux-musl
 
 DEPENDENCIES
+  bidi2pdf!
+  bidi2pdf-rails!
   bootsnap
   brakeman
   debug
@@ -357,6 +404,7 @@ DEPENDENCIES
   turbo-rails
   tzinfo-data
   web-console
+  websocket-native
 
 BUNDLED WITH
    2.6.7

@@ -55,3 +55,9 @@ group :development do
   # Use console on exceptions pages [https://github.com/rails/web-console]
   gem "web-console"
 end
+
+gem "bidi2pdf", github: "dieter-medium/bidi2pdf", branch: "main"
+gem "bidi2pdf-rails", github: "dieter-medium/bidi2pdf-rails", branch: "main"
+gem "websocket-native"
+
+
