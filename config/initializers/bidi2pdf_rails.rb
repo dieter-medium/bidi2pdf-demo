@@ -10,13 +10,13 @@ Bidi2pdfRails.configure do |config|
 
   # Allowed values: "none", "low", "medium", "high"
   config.general_options.verbosity = "medium" # How verbose to be  
-  config.general_options.headless = true # Run Chrome in headless mode
+  config.general_options.headless = false # Run Chrome in headless mode
   # config.general_options.wait_for_network_idle = true # Wait for network idle  
-  # config.general_options.wait_for_page_loaded = false # Wait for page loaded  
+  config.general_options.wait_for_page_loaded = true # Wait for page loaded
   # config.general_options.wait_for_page_check_script = nil # Wait for page check script  
   # config.general_options.notification_service = -> { ActiveSupport::Notifications } # Notification service  
-  # config.general_options.default_timeout = 10 # Default timeout for various Bidi commands  
-  # config.general_options.chrome_session_args = ["--disable-gpu", "--disable-popup-blocking", "--disable-hang-monitor"] # Chrome session arguments  
+  # config.general_options.default_timeout = 10 # Default timeout for various Bidi commands
+  config.general_options.chrome_session_args = ["--disable-gpu", "--disable-popup-blocking", "--disable-hang-monitor", "--start-maximized"] # Chrome session arguments
 
   #
   # Chromedriver Settings (when chromedriver run within your app)
@@ -56,7 +56,8 @@ Bidi2pdfRails.configure do |config|
   # config.pdf_settings.custom_js = nil # Raw JavaScript code to inject before PDF generation (without <script> tags)  
   # config.pdf_settings.custom_css = nil # Raw CSS styles to inject before PDF generation (without <style> tags)  
   # config.pdf_settings.custom_js_url = nil # URL to JavaScript file to load before PDF generation  
-  # config.pdf_settings.custom_css_url = nil # URL to CSS file to load before PDF generation  
+  # config.pdf_settings.custom_css_url = nil # URL to CSS file to load before PDF generation
+  config.pdf_settings.asset_host = ->(_controller) { ENV["IN_DEV_CONTAINER"] && ENV["IN_DEV_CONTAINER"] == "true" ? "http://rails-app:3000/" : nil } # Asset hosts (e.g. http://rails-app:3001)
 
   #
   # Remote URL Settings
