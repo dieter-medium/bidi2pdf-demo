@@ -1,0 +1,16 @@
+/* INTERFACE ------------------------------------------------------------------- */
+
+/* paged js interface and screen view css */
+@import RAILS_ASSET_URL("pagedjs/interface/interface.css");
+
+/* uncomment for recto/verso book : */
+/* @import RAILS_ASSET_URL("pagedjs/interface/recto-verso.css"); */
+
+/* uncomment to see the baseline : */
+/* @import RAILS_ASSET_URL("pagedjs/interface/baseline.css"); */
+
+@import RAILS_ASSET_URL("pagedjs/interface/header.css");
+
+
+
+

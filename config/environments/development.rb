@@ -66,4 +66,16 @@ Rails.application.configure do
 
   # Raise error when a before_action's only/except options reference missing actions.
   config.action_controller.raise_on_missing_callback_actions = true
+
+  # --- BEGIN Bidi2PDF Settings ---
+  # Custom Bidi2PDF settings, check config/initializers/bidi2pdf_rails.rb for hints
+  # config.x.bidi2pdf_rails.headless = false
+  # config.x.bidi2pdf_rails.verbosity = :high
+  # config.x.bidi2pdf_rails.log_browser_console = true
+  # config.x.bidi2pdf_rails.default_timeout = 60
+
+  # takes care of asset host settings when rendering views directly
+  Bidi2pdfRails::Services::AssetHostManager.override_asset_host!(config)
+  # --- END Bidi2PDF Settings ---
+
 end

@@ -58,6 +58,9 @@ end
 
 gem "bidi2pdf", github: "dieter-medium/bidi2pdf", branch: "main"
 gem "bidi2pdf-rails", github: "dieter-medium/bidi2pdf-rails", branch: "main"
+
 gem "websocket-native"
+
+gem "rack-cors", "~> 2.0"
 
 

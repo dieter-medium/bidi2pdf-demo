@@ -1,0 +1,2 @@
+module ExampleBookSpreadHelper
+end

@@ -1,6 +1,6 @@
 GIT
   remote: https://github.com/dieter-medium/bidi2pdf-rails.git
-  revision: d93d4ee10e0b65d58643c57356adf8162a849b18
+  revision: c83d6f805ee99b1eab890ec7e430d4692f8bf0ad
   branch: main
   specs:
     bidi2pdf-rails (0.1.1)
@@ -9,7 +9,7 @@ GIT
 
 GIT
   remote: https://github.com/dieter-medium/bidi2pdf.git
-  revision: 68c7bae09aa9d8cd361e22b4d087002182690dfb
+  revision: b3c129ded7759812e4aadd9a7f1541914ecc67c2
   branch: main
   specs:
     bidi2pdf (0.1.8)
@@ -110,7 +110,7 @@ GEM
     chromedriver-binary (0.1.2)
       rubyzip (~> 2.4)
     concurrent-ruby (1.3.5)
-    connection_pool (2.5.2)
+    connection_pool (2.5.3)
     crass (1.0.6)
     date (3.4.1)
     debug (1.10.0)
@@ -177,7 +177,7 @@ GEM
     minitest (5.25.5)
     msgpack (1.8.0)
     mutex_m (0.3.0)
-    net-imap (0.5.7)
+    net-imap (0.5.8)
       date
       net-protocol
     net-pop (0.1.2)
@@ -228,6 +228,8 @@ GEM
     raabro (1.4.0)
     racc (1.8.1)
     rack (3.1.13)
+    rack-cors (2.0.2)
+      rack (>= 2.0.0)
     rack-session (2.1.0)
       base64 (>= 0.1.0)
       rack (>= 3.0.0)
@@ -393,6 +395,7 @@ DEPENDENCIES
   kamal
   propshaft
   puma (>= 5.0)
+  rack-cors (~> 2.0)
   rails (~> 8.0.2)
   rubocop-rails-omakase
   solid_cable

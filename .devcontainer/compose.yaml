@@ -3,6 +3,12 @@ name: "bidi2pdf_demo"
 services:
   remote-chrome:
     image: dieters877565/chromedriver:latest
+    environment:
+      ENABLE_XVFB: true
+      ENABLE_VNC: true
+      VNC_PASS: supersecret
+    ports:
+      - 5900:5900
 
   rails-app:
     build:
@@ -10,7 +16,7 @@ services:
       dockerfile: .devcontainer/Dockerfile
 
     volumes:
-    - ../..:/workspaces:cached
+      - ../..:/workspaces:cached
 
     # Overrides default command so things don't shut down after the process ends.
     command: sleep infinity

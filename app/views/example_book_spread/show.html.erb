@@ -1,0 +1,66 @@
+<% content_for :head do %>
+  <%= stylesheet_link_tag "fonts/VG5000/vg5000", "data-turbo-track": "reload" %>
+  <%= stylesheet_link_tag "pagedjs/reset", "data-turbo-track": "reload" %>
+  <%= stylesheet_link_tag "example_book_spread/print", "data-turbo-track": "reload" %>
+  <%= stylesheet_link_tag "pagedjs/pagedjs", "data-turbo-track": "reload" %>
+<% end %>
+
+<div data-controller="example-book-spread"
+     data-example-book-spread-stylesheets-value="<%= ["pagedjs/reset", "fonts/VG5000/vg5000", "example_book_spread/print"].map { |stylesheet| asset_url(stylesheet, type: :stylesheet) }.to_json %>">
+
+  <div data-example-book-spread-target="content">
+    <h1>My book</h1>
+
+    <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Suspendisse turpis nulla, volutpat vitae libero ut,
+      volutpat venenatis velit. Integer bibendum in erat tincidunt eleifend. Donec vitae ligula iaculis risus ornare
+      efficitur. Curabitur turpis libero, venenatis sit amet tincidunt sit amet, vulputate id lectus. Suspendisse
+      pretium
+      velit ante, sit amet vehicula ipsum aliquam vel. Nulla sollicitudin risus et dolor rhoncus venenatis. Pellentesque
+      rhoncus nisl felis, in pellentesque dolor pretium ut. Vestibulum ante ipsum primis in faucibus orci luctus et
+      ultrices posuere cubilia curae; Integer consequat tempus ante, quis faucibus lorem tincidunt sit amet. </p>
+    <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Suspendisse turpis nulla, volutpat vitae libero ut,
+      volutpat venenatis velit. Integer bibendum in erat tincidunt eleifend. Donec vitae ligula iaculis risus ornare
+      efficitur. Curabitur turpis libero, venenatis sit amet tincidunt sit amet, vulputate id lectus. Suspendisse
+      pretium
+      velit ante, sit amet vehicula ipsum aliquam vel. Nulla sollicitudin risus et dolor rhoncus venenatis. Pellentesque
+      rhoncus nisl felis, in pellentesque dolor pretium ut. Vestibulum ante ipsum primis in faucibus orci luctus et
+      ultrices posuere cubilia curae; Integer consequat tempus ante, quis faucibus lorem tincidunt sit amet. </p>
+    <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Suspendisse turpis nulla, volutpat vitae libero ut,
+      volutpat venenatis velit. Integer bibendum in erat tincidunt eleifend. Donec vitae ligula iaculis risus ornare
+      efficitur. Curabitur turpis libero, venenatis sit amet tincidunt sit amet, vulputate id lectus. Suspendisse
+      pretium
+      velit ante, sit amet vehicula ipsum aliquam vel. Nulla sollicitudin risus et dolor rhoncus venenatis. Pellentesque
+      rhoncus nisl felis, in pellentesque dolor pretium ut. Vestibulum ante ipsum primis in faucibus orci luctus et
+      ultrices posuere cubilia curae; Integer consequat tempus ante, quis faucibus lorem tincidunt sit amet. </p>
+    <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Suspendisse turpis nulla, volutpat vitae libero ut,
+      volutpat venenatis velit. Integer bibendum in erat tincidunt eleifend. Donec vitae ligula iaculis risus ornare
+      efficitur. Curabitur turpis libero, venenatis sit amet tincidunt sit amet, vulputate id lectus. Suspendisse
+      pretium
+      velit ante, sit amet vehicula ipsum aliquam vel. Nulla sollicitudin risus et dolor rhoncus venenatis. Pellentesque
+      rhoncus nisl felis, in pellentesque dolor pretium ut. Vestibulum ante ipsum primis in faucibus orci luctus et
+      ultrices posuere cubilia curae; Integer consequat tempus ante, quis faucibus lorem tincidunt sit amet. </p>
+    <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Suspendisse turpis nulla, volutpat vitae libero ut,
+      volutpat venenatis velit. Integer bibendum in erat tincidunt eleifend. Donec vitae ligula iaculis risus ornare
+      efficitur. Curabitur turpis libero, venenatis sit amet tincidunt sit amet, vulputate id lectus. Suspendisse
+      pretium
+      velit ante, sit amet vehicula ipsum aliquam vel. Nulla sollicitudin risus et dolor rhoncus venenatis. Pellentesque
+      rhoncus nisl felis, in pellentesque dolor pretium ut. Vestibulum ante ipsum primis in faucibus orci luctus et
+      ultrices posuere cubilia curae; Integer consequat tempus ante, quis faucibus lorem tincidunt sit amet. </p>
+    <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Suspendisse turpis nulla, volutpat vitae libero ut,
+      volutpat venenatis velit. Integer bibendum in erat tincidunt eleifend. Donec vitae ligula iaculis risus ornare
+      efficitur. Curabitur turpis libero, venenatis sit amet tincidunt sit amet, vulputate id lectus. Suspendisse
+      pretium
+      velit ante, sit amet vehicula ipsum aliquam vel. Nulla sollicitudin risus et dolor rhoncus venenatis. Pellentesque
+      rhoncus nisl felis, in pellentesque dolor pretium ut. Vestibulum ante ipsum primis in faucibus orci luctus et
+      ultrices posuere cubilia curae; Integer consequat tempus ante, quis faucibus lorem tincidunt sit amet. </p>
+
+
+    <%= image_tag 'example_book_spread/mon-image.jpg', class: "mon-image" %>
+
+
+  </div>
+
+  <div data-example-book-spread-target="rendered"></div>
+</div>
+
+

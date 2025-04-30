@@ -87,4 +87,16 @@ Rails.application.configure do
   #
   # Skip DNS rebinding protection for the default health check endpoint.
   # config.host_authorization = { exclude: ->(request) { request.path == "/up" } }
+
+  # --- BEGIN Bidi2PDF Settings ---
+  # Custom Bidi2PDF settings, check config/initializers/bidi2pdf_rails.rb for hints
+  # config.x.bidi2pdf_rails.headless = false
+  # config.x.bidi2pdf_rails.verbosity = :high
+  # config.x.bidi2pdf_rails.log_browser_console = true
+  # config.x.bidi2pdf_rails.default_timeout = 60
+
+  # takes care of asset host settings when rendering views directly
+  Bidi2pdfRails::Services::AssetHostManager.override_asset_host!(config)
+  # --- END Bidi2PDF Settings ---
+
 end

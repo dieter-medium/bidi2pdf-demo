@@ -10,13 +10,13 @@ Bidi2pdfRails.configure do |config|
 
   # Allowed values: "none", "low", "medium", "high"
   config.general_options.verbosity = "medium" # How verbose to be  
-  config.general_options.headless = false # Run Chrome in headless mode
+  # config.general_options.headless = !Rails.env.development? # Run Chrome in headless mode  
   # config.general_options.wait_for_network_idle = true # Wait for network idle  
   config.general_options.wait_for_page_loaded = true # Wait for page loaded
   # config.general_options.wait_for_page_check_script = nil # Wait for page check script  
   # config.general_options.notification_service = -> { ActiveSupport::Notifications } # Notification service  
-  # config.general_options.default_timeout = 10 # Default timeout for various Bidi commands
-  config.general_options.chrome_session_args = ["--disable-gpu", "--disable-popup-blocking", "--disable-hang-monitor", "--start-maximized"] # Chrome session arguments
+  # config.general_options.default_timeout = 10 # Default timeout for various Bidi commands  
+  # config.general_options.chrome_session_args = ["--disable-gpu", "--disable-popup-blocking", "--disable-hang-monitor"] # Chrome session arguments  
 
   #
   # Chromedriver Settings (when chromedriver run within your app)
@@ -63,7 +63,9 @@ Bidi2pdfRails.configure do |config|
   # Remote URL Settings
   #
 
-  config.render_remote_settings.browser_url = "http://remote-chrome:3000/session" # Remote browser URL (e.g. http://localhost:3001/sesion)
+  if ENV["IN_DEV_CONTAINER"] && ENV["IN_DEV_CONTAINER"] == "true"
+    config.render_remote_settings.browser_url = "http://remote-chrome:3000/session" # Remote browser URL (e.g. http://localhost:3001/sesion)
+  end
   # config.render_remote_settings.basic_auth_user = nil # Basic auth user  
   # config.render_remote_settings.basic_auth_pass = -> { Rails.application.credentials.dig('bidi2pdf_rails', 'basic_auth_pass') } # Basic auth password  
   # config.render_remote_settings.headers = {"X-API-INFO" => "my info"} # Headers to be send when allong an url  
@@ -73,10 +75,10 @@ Bidi2pdfRails.configure do |config|
   # Lifecycle Settings
   #
 
-  # config.lifecycle_settings.before_navigate = ->(url_or_content, browser_tab, filename, controller) { Rails.logger.info "Navigating to #{url_or_content}" } # Hook to be called before navigating to a URL  
-  # config.lifecycle_settings.after_navigate = ->(url_or_content, browser_tab, filename, controller) { Rails.logger.info "Navigated to #{url_or_content}" } # Hook to be called after navigating to a URL  
-  # config.lifecycle_settings.after_wait_for_tab = ->(url_or_content, browser_tab, filename, controller) { Rails.logger.info "Waited for #{url_or_content}" } # Hook to be called after waiting for a tab  (when waiting is enabled)  
-  # config.lifecycle_settings.after_print = ->(url_or_content, browser_tab, binary_pdf_content, filename, controller) { Rails.logger.info "Printed #{url_or_content}"; binary_pdf_content } # Hook to be called after printing, needs to return the pdf-binary-content. Here you can store the content into a file, sign it, or add meta data.  
+  # config.lifecycle_settings.before_navigate = ->(url_or_content, browser_tab, filename, controller) { Rails.logger.tagged("bidi2pdf-rails").info "Navigating to #{url_or_content}" } # Hook to be called before navigating to a URL  
+  config.lifecycle_settings.after_navigate = ->(url_or_content, browser_tab, filename, controller) { Rails.logger.tagged("bidi2pdf-rails").info "Navigated to #{url_or_content}" } # Hook to be called after navigating to a URL
+  # config.lifecycle_settings.after_wait_for_tab = ->(url_or_content, browser_tab, filename, controller) { Rails.logger.tagged("bidi2pdf-rails").info "Waited for #{url_or_content}" } # Hook to be called after waiting for a tab  (when waiting is enabled)  
+  # config.lifecycle_settings.after_print = ->(url_or_content, browser_tab, binary_pdf_content, filename, controller) { Rails.logger.tagged("bidi2pdf-rails").info "Printed #{url_or_content}"; binary_pdf_content } # Hook to be called after printing, needs to return the pdf-binary-content. Here you can store the content into a file, sign it, or add meta data.  
 
   # Values can be used from the environment or from the config file.
   # with the following pattern:
@@ -84,7 +86,7 @@ Bidi2pdfRails.configure do |config|
   # config.general_options.verbosity = overrides.verbosity if overrides.verbosity
 end
 
-Rails.application.config.after_initialize do
+Rails.application.config.after_initialize do |_app|
   Bidi2pdfRails::MainLogSubscriber.attach_to "bidi2pdf", inherit_all: true # needed for imported methods
   Bidi2pdfRails::MainLogSubscriber.attach_to "bidi2pdf_rails", inherit_all: true # needed for imported methods
 
@@ -94,3 +96,5 @@ Rails.application.config.after_initialize do
 
   Bidi2pdfRails::NetworkLogSubscriber.attach_to "bidi2pdf"
 end
+
+Importmap::ImportmapTagsHelper.prepend Bidi2pdfRails::Services::ImportmapTagsHelperOverride

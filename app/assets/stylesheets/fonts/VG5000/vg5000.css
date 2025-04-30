@@ -1,0 +1,20 @@
+/* ----------------------------------------------------
+VG5000
+-------------------------------------------------------
+Designed by Justin Bihan 
+distribued by Velvetyne 
+License:  SIL Open Font License, Version 1.1
+https://velvetyne.fr/fonts/vg5000/ 
+---------------------------------------------------- */
+
+
+@font-face {
+    font-family: 'VG5000';
+    src: url('VG5000-Regular_web.eot');
+    src: url('VG5000-Regular_web.eot?#iefix') format('embedded-opentype'),
+    url('VG5000-Regular_web.woff') format('woff'),
+    url('VG5000-Regular_web.woff2') format('woff2'),
+    url('VG5000-Regular_web.ttf') format('truetype');
+    font-weight: normal;
+    font-style: normal;
+}

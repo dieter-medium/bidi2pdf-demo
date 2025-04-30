@@ -5,9 +5,10 @@
   "dockerComposeFile": "compose.yaml",
   "service": "rails-app",
   "workspaceFolder": "/workspaces/${localWorkspaceFolderBasename}",
-
-  "runServices": ["rails-app", "remote-chrome"],
-
+  "runServices": [
+    "rails-app",
+    "remote-chrome"
+  ],
   // Features to add to the dev container. More info: https://containers.dev/features.
   "features": {
     "ghcr.io/devcontainers/features/github-cli:1": {},
@@ -15,14 +16,21 @@
     "ghcr.io/devcontainers/features/docker-outside-of-docker:1": {},
     "ghcr.io/rails/devcontainer/features/sqlite3": {}
   },
-
+  "mounts": [
+    {
+      "source": "ruby-cache",
+      "target": "/home/vscode/.rbenv/versions/3.4.3/lib/ruby/gems/3.4.0",
+      "type": "volume"
+    }
+  ],
   "containerEnv": {
-    "KAMAL_REGISTRY_PASSWORD": "$KAMAL_REGISTRY_PASSWORD"
+    "KAMAL_REGISTRY_PASSWORD": "$KAMAL_REGISTRY_PASSWORD",
+    "IN_DEV_CONTAINER": "true"
   },
-
   // Use 'forwardPorts' to make a list of ports inside the container available locally.
-  "forwardPorts": [3000],
-
+  "forwardPorts": [
+    3000
+  ],
   // Configure tool-specific properties.
   // "customizations": {},
 
@@ -31,5 +39,8 @@
 
 
   // Use 'postCreateCommand' to run commands after the container is created.
-  "postCreateCommand": "bin/setup --skip-server"
+  "postCreateCommand": {
+    "fixVolumePerms": "sudo chown -R $(whoami): /home/vscode/.rbenv",
+    "setupRails": "bin/setup --skip-server"
+  }
 }
