@@ -1,0 +1,15 @@
+@font-face {
+    font-family: "IBM Plex Mono";
+    src: url("IBMPlexMono-Text.woff2") format("woff2"),
+    url("IBMPlexMono-Text.woff") format("woff");
+    font-weight: normal;
+    font-style: normal;
+}
+
+@font-face {
+    font-family: "IBM Plex Mono";
+    src: url("IBMPlexMono-TextItalic.woff2") format("woff2"),
+    url("IBMPlexMono-TextItalic.woff") format("woff");
+    font-weight: normal;
+    font-style: italic;
+}

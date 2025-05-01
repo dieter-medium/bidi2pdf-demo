@@ -1,0 +1,385 @@
+/*
+ * Code adapted from pagedjs/starter-kits/book_avanced-interface, licensed under the MIT License.
+ * See: https://gitlab.coko.foundation/pagedjs/starter-kits/book_avanced-interface
+ *
+ * Copyright (c) 2023 Julie Blanc
+ *
+ * Permission is hereby granted, free of charge, to any person obtaining a copy
+ * of this software and associated documentation files (the "Software"), to deal
+ * in the Software without restriction, including without limitation the rights
+ * to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
+ * copies of the Software, and to permit persons to whom the Software is
+ * furnished to do so, subject to the following conditions:
+ *
+ * The above copyright notice and this permission notice shall be included in all
+ * copies or substantial portions of the Software.
+ *
+ * THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+ * IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+ * FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
+ * AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+ * LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
+ * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
+ * SOFTWARE.
+ */
+
+.reset-this {
+    animation: none;
+    animation-delay: 0;
+    animation-direction: normal;
+    animation-duration: 0;
+    animation-fill-mode: none;
+    animation-iteration-count: 1;
+    animation-name: none;
+    animation-play-state: running;
+    animation-timing-function: ease;
+    backface-visibility: visible;
+    background: 0;
+    background-attachment: scroll;
+    background-clip: border-box;
+    background-color: transparent;
+    background-image: none;
+    background-origin: padding-box;
+    background-position: 0 0;
+    background-position-x: 0;
+    background-position-y: 0;
+    background-repeat: repeat;
+    background-size: auto auto;
+    border: 0;
+    border-style: none;
+    border-width: medium;
+    border-color: inherit;
+    border-bottom: 0;
+    border-bottom-color: inherit;
+    border-bottom-left-radius: 0;
+    border-bottom-right-radius: 0;
+    border-bottom-style: none;
+    border-bottom-width: medium;
+    border-collapse: separate;
+    border-image: none;
+    border-left: 0;
+    border-left-color: inherit;
+    border-left-style: none;
+    border-left-width: medium;
+    border-radius: 0;
+    border-right: 0;
+    border-right-color: inherit;
+    border-right-style: none;
+    border-right-width: medium;
+    border-spacing: 0;
+    border-top: 0;
+    border-top-color: inherit;
+    border-top-left-radius: 0;
+    border-top-right-radius: 0;
+    border-top-style: none;
+    border-top-width: medium;
+    bottom: auto;
+    box-shadow: none;
+    box-sizing: content-box;
+    caption-side: top;
+    clear: none;
+    clip: auto;
+    color: inherit;
+    columns: auto;
+    column-count: auto;
+    column-fill: balance;
+    column-gap: normal;
+    column-rule: medium none currentColor;
+    column-rule-color: currentColor;
+    column-rule-style: none;
+    column-rule-width: none;
+    column-span: 1;
+    column-width: auto;
+    content: normal;
+    counter-increment: none;
+    counter-reset: none;
+    cursor: auto;
+    direction: ltr;
+    display: inline;
+    empty-cells: show;
+    float: none;
+    font: normal;
+    font-family: inherit;
+    font-size: medium;
+    font-style: normal;
+    font-variant: normal;
+    font-weight: normal;
+    height: auto;
+    hyphens: none;
+    left: auto;
+    letter-spacing: normal;
+    line-height: normal;
+    list-style: none;
+    list-style-image: none;
+    list-style-position: outside;
+    list-style-type: disc;
+    margin: 0;
+    margin-bottom: 0;
+    margin-left: 0;
+    margin-right: 0;
+    margin-top: 0;
+    max-height: none;
+    max-width: none;
+    min-height: 0;
+    min-width: 0;
+    opacity: 1;
+    orphans: 0;
+    outline: 0;
+    outline-color: invert;
+    outline-style: none;
+    outline-width: medium;
+    overflow: visible;
+    overflow-x: visible;
+    overflow-y: visible;
+    padding: 0;
+    padding-bottom: 0;
+    padding-left: 0;
+    padding-right: 0;
+    padding-top: 0;
+    page-break-after: auto;
+    page-break-before: auto;
+    page-break-inside: auto;
+    perspective: none;
+    perspective-origin: 50% 50%;
+    position: static;
+    /* May need to alter quotes for different locales (e.g fr) */
+    quotes: "\201C" "\201D" "\2018" "\2019";
+    right: auto;
+    tab-size: 8;
+    table-layout: auto;
+    text-align: inherit;
+    text-align-last: auto;
+    text-decoration: none;
+    text-decoration-color: inherit;
+    text-decoration-line: none;
+    text-decoration-style: solid;
+    text-indent: 0;
+    text-shadow: none;
+    text-transform: none;
+    top: auto;
+    transform: none;
+    transform-style: flat;
+    transition: none;
+    transition-delay: 0s;
+    transition-duration: 0s;
+    transition-property: none;
+    transition-timing-function: ease;
+    unicode-bidi: normal;
+    vertical-align: baseline;
+    visibility: visible;
+    white-space: normal;
+    widows: 0;
+    width: auto;
+    word-spacing: normal;
+    z-index: auto;
+    /* basic modern patch */
+    all: initial;
+    all: unset;
+}
+
+/* basic modern patch */
+
+#interface-header {
+    all: initial;
+}
+
+#interface-header * {
+    all: unset;
+}
+
+.interface-bar-bottom #interface-header {
+    bottom: 0;
+    top: unset;
+}
+
+#interface-header {
+    width: 100vw;
+    height: var(--pagedjs-header-height);
+    box-sizing: border-box;
+    background-color: #cfcfcf;
+    --color-interface-header: #222;
+    --border-color: #999;
+    --backgroung-button: rgb(195, 195, 195);
+    color: var(--color-interface-header);
+    border-bottom: 1px solid var(--border-color);
+    position: fixed;
+    top: 0px;
+    left: 0px;
+    z-index: 999999999999999999;
+    font-size: 12px;
+
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 10px 20px;
+
+    font-family: "IBM Plex Mono";
+
+    box-shadow: 22px 7px 13px 0px rgba(153, 153, 153, 0.57);
+}
+
+#interface-header input[type="checkbox"] {
+    display: none;
+}
+
+form {
+    margin-bottom: 0;
+}
+
+/* GRID FORM --------------------------------------- */
+
+#header-group-grid {
+    width: 700px;
+}
+
+#interface-header .grid-form {
+    width: 100%;
+    display: flex;
+    align-items: center;
+    margin-bottom: 1ch;
+}
+
+#interface-header .grid-form h1 {
+    font-size: 14px;
+
+    width: 14ch;
+    margin: 0;
+    margin-right: 3ch;
+}
+
+#interface-header .grid-form-label {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 7ch;
+    padding: 3px 0;
+    border: 1px solid var(--color-interface-header);
+    border-radius: 2px;
+    cursor: pointer;
+    box-shadow: 1px 1px 0px 0px var(--color-interface-header);
+    margin-right: 5ch;
+}
+
+#interface-header .grid-form-label:hover {
+    background-color: var(--backgroung-button);
+}
+
+#interface-header .grid-form-header {
+    display: flex;
+    align-items: center;
+}
+
+#interface-header .grid-form-values-group {
+    padding-top: 0.8ch;
+}
+
+/* BASELINE GROUP --------------------------------------- */
+
+#interface-header .grid-form input[type="number"] {
+    width: 50px;
+    background-color: transparent;
+    border: 1px solid var(--border-color);
+    border-radius: 2px;
+    cursor: pointer;
+    box-shadow: 1px 1px 0px 0px #9f9f9f;
+    outline: none;
+}
+
+#size-baseline-form label {
+    margin-right: 1em;
+}
+
+#label-position {
+    margin-left: 1.5em;
+}
+
+/* BUTTONS GROUP */
+
+#header-group-right {
+    display: flex;
+    align-items: center;
+}
+
+#header-group-right > p {
+    margin-right: 5ch !important;
+    margin-top: 0 !important;
+    margin-left: 0 !important;
+    margin-bottom: 0 !important;
+    padding: 0 !important;
+    color: var(--color-interface-header) !important;
+    position: relative !important;
+    top: 0 !important;
+    left: 0 !important;
+    bottom: 0 !important;
+    right: 0 !important;
+    width: auto !important;
+    height: auto !important;
+    font-size: 12px !important;
+    line-height: 1em !important;
+}
+
+#buttons {
+    display: flex;
+    justify-content: flex-end;
+    /* width: 300px; */
+}
+
+#button-print {
+    width: 60px;
+    opacity: 0.2;
+    background: none;
+    outline: none;
+}
+
+#label-preview-toggle img {
+    width: 80%;
+    height: 80%;
+}
+
+#label-preview-toggle,
+#button-print {
+    --buttons-size: 36px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: var(--buttons-size);
+    height: var(--buttons-size);
+    margin-right: 10px;
+    border: 1px solid var(--border-color);
+    border-radius: 2px;
+    cursor: pointer;
+    box-shadow: 1px 1px 0px 0px #9f9f9f;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+.interface-preview #label-preview-toggle {
+    border: 2px solid var(--color-interface-header);
+}
+
+#button-print {
+    padding: 6px;
+}
+
+#label-preview-toggle:hover,
+#button-print:hover {
+    background-color: var(--backgroung-button);
+}
+
+#button-print[data-ready="true"] {
+    opacity: 1;
+    cursor: pointer;
+}
+
+@media print {
+    #interface-header {
+        display: none;
+    }
+}
+
+
+@media screen, pagedjs-ignore {
+    .pagedjs_pages {
+        padding-bottom: 20vh;
+    }
+}

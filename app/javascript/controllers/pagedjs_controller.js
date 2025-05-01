@@ -1,10 +1,11 @@
 import {Controller} from "@hotwired/stimulus"
-import {Previewer} from "pagejs"
-import PageJsReadyHandler from "handlers/page_js_ready_handler"
+import {Previewer} from "pagedjs"
+import PagedJsReadyHandler from "handlers/paged_js_ready_handler"
 
 export default class extends Controller {
     static values = {
-        stylesheets: Array
+        stylesheets: Array,
+        clearContent: {type: Boolean, default: true},
     }
 
     static targets = ["content", "rendered"]
@@ -13,9 +14,11 @@ export default class extends Controller {
         let previewer = new Previewer();
         let content = this.contentTarget.innerHTML;
 
-        this.contentTarget.innerHTML = "";
+        if (this.clearContentValue) {
+            this.contentTarget.innerHTML = "";
+        }
 
-        previewer.registerHandlers(PageJsReadyHandler);
+        previewer.registerHandlers(PagedJsReadyHandler);
 
         previewer.preview(
             content,

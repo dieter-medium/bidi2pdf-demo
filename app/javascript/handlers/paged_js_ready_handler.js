@@ -1,6 +1,6 @@
-import {Handler} from "pagejs"
+import {Handler} from "pagedjs"
 
-export default class PageJsReadyHandler extends Handler {
+export default class PagedJsReadyHandler extends Handler {
     constructor(chunker, polisher, caller) {
         super(chunker, polisher, caller);
     }

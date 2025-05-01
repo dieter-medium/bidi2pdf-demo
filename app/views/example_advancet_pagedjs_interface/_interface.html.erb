@@ -1,0 +1,76 @@
+<header data-controller="pagedjs-interface" class="reset-this" id="interface-header">
+  <div class="reset-this" id="header-group-grid">
+    <form class="reset-this grid-form" id="baseline-form">
+      <div class="reset-this grid-form-header">
+        <h1 class="reset-this">Baseline grid</h1>
+        <input
+          type="checkbox"
+          id="baseline-toggle"
+          data-pagedjs-interface-target="baselineToggle"
+          data-action="input->pagedjs-interface#toggleBaseline"
+        >
+        <label
+          for="baseline-toggle"
+          class="reset-this grid-form-label"
+          data-pagedjs-interface-target="baselineButton"
+        >See</label>
+      </div>
+      <div class="reset-this grid-form-values-group">
+        <label for="size-baseline">Size (px)</label>
+        <input
+          type="number"
+          id="size-baseline"
+          min="1" max="100"
+          data-pagedjs-interface-target="baselineSize"
+          data-action="input->pagedjs-interface#changeBaselineSize"
+          value="12"
+        >
+        <label for="position-baseline">Position (px)</label>
+        <input
+          type="number"
+          id="position-baseline"
+          data-pagedjs-interface-target="baselinePosition"
+          data-action="input->pagedjs-interface#changeBaselinePosition"
+          value="0"
+        >
+      </div>
+    </form>
+
+    <form class="reset-this grid-form" id="marginbox-form">
+      <div class="reset-this grid-form-header">
+        <h1 class="reset-this">Margin boxes</h1>
+        <input
+          type="checkbox"
+          id="marginbox-toggle"
+          data-pagedjs-interface-target="marginboxToggle"
+          data-action="input->pagedjs-interface#toggleMarginbox"
+        >
+        <label
+          for="marginbox-toggle"
+          class="reset-this grid-form-label"
+          data-pagedjs-interface-target="marginboxButton"
+        >See</label>
+      </div>
+    </form>
+  </div>
+
+  <div class="reset-this" id="header-group-right">
+    <p><span id="nrb-pages"></span> pages</p>
+    <div class="reset-this header-group" id="buttons">
+      <form id="preview-form">
+        <input
+          type="checkbox"
+          id="preview-toggle"
+          data-pagedjs-interface-target="previewToggle"
+          data-action="input->pagedjs-interface#togglePreview"
+        >
+        <label for="preview-toggle">
+          <%= image_tag 'example_advancet_pagedjs_interface/icon-preview.svg' %>
+        </label>
+      </form>
+      <button id="button-print" onclick="window.print()" data-ready="false" data-text="Print">
+        <%= image_tag 'example_advancet_pagedjs_interface/icon-printer.svg' %>
+      </button>
+    </div>
+  </div>
+</header>

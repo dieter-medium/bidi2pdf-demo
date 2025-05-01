@@ -1,0 +1,21 @@
+@media print {
+
+    @page {
+        size: A5;
+        bleed: 6mm;
+        marks: crop cross;
+        @bottom-center {
+            content: counter(page);
+        }
+    }
+
+}
+
+h1 {
+    font-family: 'VG5000';
+    text-align: center;
+}
+
+img {
+    max-width: 100%;
+}

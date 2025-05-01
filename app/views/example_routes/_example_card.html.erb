@@ -1,0 +1,26 @@
+<!-- app/views/example_routes/_example_card.html.erb -->
+<div class="col-md-6 mb-4">
+  <div class="card h-100 shadow-sm">
+    <div class="card-body d-flex flex-column">
+      <small class="text-muted mb-2">
+        Controller: <code><%= example[:controller] %></code>,
+        Action: <code><%= example[:action] %></code>
+      </small>
+      <h5 class="card-title"><%= example[:title] %></h5>
+      <p class="card-text flex-grow-1 mb-3">
+        <%= example[:description] %>
+        <a href="<%= example[:repo_url] %>" target="_blank" rel="noopener">
+          <%= example[:repo_text] %>
+        </a>.
+      </p>
+      <div class="mt-auto">
+        <a href="<%= example[:url] %>" class="btn btn-primary btn-sm">
+          View HTML
+        </a>
+        <a href="<%= example[:pdf_url] %>" class="btn btn-outline-secondary btn-sm">
+          View PDF
+        </a>
+      </div>
+    </div>
+  </div>
+</div>
