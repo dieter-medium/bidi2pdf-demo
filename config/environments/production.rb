@@ -98,5 +98,4 @@ Rails.application.configure do
   # takes care of asset host settings when rendering views directly
   Bidi2pdfRails::Services::AssetHostManager.override_asset_host!(config)
   # --- END Bidi2PDF Settings ---
-
 end

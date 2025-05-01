@@ -1,19 +1,20 @@
 # frozen_string_literal: true
+
 #
 # A rake task to download the newest ESM version of pagedjs from https://unpkg.com/pagedjs/dist/paged.esm.js
 # into the folder vendor/javascript/paged.esm-<version>.js
 
 namespace :update_pagedjs do
   desc "Download the newest ESM version of pagedjs. Usage: rake update_pagedjs:download[version] VERBOSE=1 DRY_RUN=1 OUT=vendor/javascript"
-  task :download, [:version] do |_, args|
-    require 'net/http'
-    require 'uri'
-    require 'fileutils'
-    require 'json'
+  task :download, [ :version ] do |_, args|
+    require "net/http"
+    require "uri"
+    require "fileutils"
+    require "json"
 
-    verbose = ENV['VERBOSE'] == '1'
-    dry_run = ENV['DRY_RUN'] == '1'
-    out_dir = ENV['OUT'] || 'vendor/javascript'
+    verbose = ENV["VERBOSE"] == "1"
+    dry_run = ENV["DRY_RUN"] == "1"
+    out_dir = ENV["OUT"] || "vendor/javascript"
     version = args[:version]
 
     begin
@@ -30,7 +31,7 @@ namespace :update_pagedjs do
   end
 
   class PagedjsDownloader
-    def initialize(verbose: false, dry_run: false, out_dir: 'vendor/javascript')
+    def initialize(verbose: false, dry_run: false, out_dir: "vendor/javascript")
       @verbose = verbose
       @dry_run = dry_run
       @out_dir = out_dir
@@ -56,7 +57,7 @@ namespace :update_pagedjs do
 
       if registry_response.is_a?(Net::HTTPSuccess)
         package_data = JSON.parse(registry_response.body)
-        version = package_data['dist-tags']['latest']
+        version = package_data["dist-tags"]["latest"]
         puts "Latest version of pagedjs: #{version}" if @verbose
         version
       else
@@ -90,7 +91,7 @@ namespace :update_pagedjs do
     def follow_redirects(response, max_redirects = 10)
       redirect_count = 0
       while response.is_a?(Net::HTTPRedirection) && redirect_count < max_redirects
-        redirect_url = response['location']
+        redirect_url = response["location"]
         redirect_uri = URI.parse(redirect_url)
         puts "Redirecting to #{redirect_url}" if @verbose
         http = create_http_client(redirect_uri)
@@ -119,7 +120,7 @@ namespace :update_pagedjs do
 
     def create_http_client(uri)
       http = Net::HTTP.new(uri.host, uri.port)
-      http.use_ssl = (uri.scheme == 'https')
+      http.use_ssl = (uri.scheme == "https")
       http.open_timeout = 10
       http.read_timeout = 30
       http

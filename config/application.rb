@@ -44,7 +44,7 @@ module Bidi2pdfDemo
     end
 
     if ENV["CODESPACES"] && ENV["CODESPACES"] == "true"
-      codespace = ENV['CODESPACE_NAME']
+      codespace = ENV["CODESPACE_NAME"]
 
       regex = /\A#{Regexp.escape(codespace)}-\d+\.app\.github\.dev\z/
       config.hosts << regex
