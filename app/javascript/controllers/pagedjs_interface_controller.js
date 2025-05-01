@@ -96,4 +96,8 @@ export default class extends Controller {
     readyToPrint(event) {
         this.buttonPrintTarget.dataset.ready = true;
     }
+
+    print(event) {
+        window.print();
+    }
 }
