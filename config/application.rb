@@ -39,6 +39,15 @@ module Bidi2pdfDemo
     # Don't generate system test files.
     config.generators.system_tests = nil
 
-    config.hosts << "rails-app"
+    if ENV["IN_DEV_CONTAINER"] && ENV["IN_DEV_CONTAINER"] == "true"
+      config.hosts << "rails-app"
+    end
+
+    if ENV["CODESPACES"] && ENV["CODESPACES"] == "true"
+      codespace = ENV['CODESPACE_NAME']
+
+      regex = /\A#{Regexp.escape(codespace)}-\d+\.app\.github\.dev\z/
+      config.hosts << regex
+    end
   end
 end
