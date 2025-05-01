@@ -334,6 +334,7 @@ form {
 #label-preview-toggle img {
     width: 80%;
     height: 80%;
+    display: block;
 }
 
 #label-preview-toggle,

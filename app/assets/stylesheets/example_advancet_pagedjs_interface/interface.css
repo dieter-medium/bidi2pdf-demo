@@ -3,6 +3,10 @@ Julie Blanc - 2020
 MIT License https://opensource.org/licenses/MIT
 A simple stylesheet to see pages on screen (with baseline included) */
 
+.icon-preview {
+    width: 24px !important;
+    height: auto !important;
+}
 
 /* Change the look */
 :root {

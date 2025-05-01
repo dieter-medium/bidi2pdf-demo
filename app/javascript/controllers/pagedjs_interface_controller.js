@@ -3,7 +3,8 @@ import {Controller} from "@hotwired/stimulus"
 export default class extends Controller {
     static targets = [
         "baselineToggle", "baselineButton", "baselineSize", "baselinePosition",
-        "marginboxToggle", "marginboxButton", "previewToggle"
+        "marginboxToggle", "marginboxButton", "previewToggle", "pageCount",
+        "buttonPrint"
     ]
 
     connect() {
@@ -86,5 +87,13 @@ export default class extends Controller {
         } else {
             this.body.classList.remove('interface-preview')
         }
+    }
+
+    updatePageCount(event) {
+        this.pageCountTarget.textContent = event.detail.pageCount;
+    }
+
+    readyToPrint(event) {
+        this.buttonPrintTarget.dataset.ready = true;
     }
 }
