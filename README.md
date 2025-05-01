@@ -53,6 +53,10 @@ To visually inspect what Chromium renders, VNC is enabled inside the container.
 ### 🔧 Setup VNC forwarding:
 
 ```bash
+# Within codespaces
+# go to ports tab and forward port 5900
+
+# locally forward the remote port 59000 to 6000 local port
 gh auth status
 # If not logged in:
 echo $GITHUB_TOKEN | gh auth login --with-token
