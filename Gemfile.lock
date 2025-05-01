@@ -1,6 +1,6 @@
 GIT
   remote: https://github.com/dieter-medium/bidi2pdf-rails.git
-  revision: c83d6f805ee99b1eab890ec7e430d4692f8bf0ad
+  revision: f1c29f0dbce1c01b2fe7527e472cf0c1a8c0265a
   branch: main
   specs:
     bidi2pdf-rails (0.1.1)

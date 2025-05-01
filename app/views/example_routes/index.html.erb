@@ -1,0 +1,25 @@
+<div class="container mt-5">
+  <h1>Example Routes</h1>
+  <p class="text-muted">
+    Controller: <code>ExampleBookSpreadController</code>, Action: <code>show</code>
+  </p>
+  <ul class="list-group">
+    <li class="list-group-item">
+      <a href="<%= example_book_spread_url %>">
+        Book Spread Example (Paged.js)
+      </a>
+      <p class="mb-1">
+        This page demonstrates a Paged.js book spread example, inspired by
+        <a href="https://gitlab.coko.foundation/pagedjs/starter-kits/book-spread_esm" target="_blank" rel="noopener">
+          pagedjs/starter-kits/book-spread_esm
+        </a>.
+      </p>
+      <p>
+        The PDF version is rendered with the <code>.pdf</code> extension:
+        <a href="<%= example_book_spread_url(format: :pdf) %>">
+          View PDF
+        </a>
+      </p>
+    </li>
+  </ul>
+</div>
