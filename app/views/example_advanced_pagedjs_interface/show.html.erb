@@ -4,11 +4,11 @@
   <%= stylesheet_link_tag "pagedjs/reset", "data-turbo-track": "reload" %>
   <%= stylesheet_link_tag "example_advanced_pagedjs_interface/interface/header", "data-turbo-track": "reload" %>
   <%= stylesheet_link_tag "example_advanced_pagedjs_interface/interface", "data-turbo-track": "reload" %>
-  <%= stylesheet_link_tag "example_advanced_pagedjs_interface/print", "data-turbo-track": "reload" %>
 <% end %>
 
 <div class="interface-bar-bottom"
      data-controller="pagedjs <%= @in_pdf ? "" : "reload-in-place" %>"
+     data-pagedjs-stylesheets-value="<%= ["pagedjs/reset", "fonts/VG5000/vg5000", "example_advanced_pagedjs_interface/print"].map { |stylesheet| asset_url(stylesheet, type: :stylesheet) }.to_json %>"
      data-pagedjs-clear-content-value="false"
      data-action="pagedjs:pages-ready@window->reload-in-place#handlePagesReady"
 >
