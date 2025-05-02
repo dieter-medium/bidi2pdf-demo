@@ -1,4 +1,4 @@
-class ExampleAdvancetPagedjsInterfaceController < ApplicationController
+class ExampleAdvancedPagedjsInterfaceController < ApplicationController
   def show
     respond_to do |format|
       format.html

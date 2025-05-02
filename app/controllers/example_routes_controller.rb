@@ -15,13 +15,13 @@ class ExampleRoutesController < ApplicationController
       },
       {
         title: "Book Template Interface (Paged.js)",
-        controller: "ExampleAdvancetPagedjsInterfaceController",
+        controller: "ExampleAdvancedPagedjsInterfaceController",
         action: "show",
         description: "This page demonstrates a Paged.js book template with interface example, inspired by",
         repo_url: "https://gitlab.coko.foundation/pagedjs/starter-kits/book_avanced-interface",
         repo_text: "pagedjs/starter-kits/book_avanced-interface",
-        url: example_advancet_pagedjs_interface_url,
-        pdf_url: example_advancet_pagedjs_interface_url(format: :pdf)
+        url: example_advanced_pagedjs_interface_url,
+        pdf_url: example_advanced_pagedjs_interface_url(format: :pdf)
       }
     ]
   end

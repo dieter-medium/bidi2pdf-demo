@@ -1,5 +1,5 @@
 Rails.application.routes.draw do
-  get "example_advancet_pagedjs_interface/show", as: :example_advancet_pagedjs_interface
+  get "example_advanced_pagedjs_interface/show", as: :example_advanced_pagedjs_interface
   get "example_book_spread/show", as: :example_book_spread
 
   # Reveal health status on /up that returns 200 if the app boots with no exceptions, otherwise 500.
