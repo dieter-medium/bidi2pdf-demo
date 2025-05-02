@@ -9,6 +9,10 @@
         }
     }
 
+    .no-print {
+        display: none !important;
+    }
+
 }
 
 h1 {

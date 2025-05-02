@@ -5,8 +5,7 @@
   <%= stylesheet_link_tag "pagedjs/pagedjs", "data-turbo-track": "reload" %>
 <% end %>
 
-<div data-controller="pagedjs"
-     data-pagedjs-stylesheets-value="<%= ["pagedjs/reset", "fonts/VG5000/vg5000", "example_book_spread/print"].map { |stylesheet| asset_url(stylesheet, type: :stylesheet) }.to_json %>">
+<div data-controller="pagedjs">
 
   <div data-pagedjs-target="content">
     <h1>My book</h1>

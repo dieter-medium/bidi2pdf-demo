@@ -4,7 +4,8 @@ import createPagedJsReadyHandler from "handlers/paged_js_ready_handler"
 
 export default class extends Controller {
     static values = {
-        stylesheets: Array,
+        // you can set stylesheets for example in this way: data-pagedjs-stylesheets-value="<%= ["pagedjs/reset", "fonts/VG5000/vg5000", "example_book_spread/print"].map { |stylesheet| asset_url(stylesheet, type: :stylesheet) }.to_json %>"
+        stylesheets: {type: Array, default: undefined}, // Paged.js searches for stylesheets when the stylesheets value is undefined
         clearContent: {type: Boolean, default: true},
     }
 

@@ -41,12 +41,11 @@ body {
         marks: crop;
 
 
-        /* the pagedjs polyfill version does not need this ?*/
-    @supports not (-webkit-overflow-scrolling:touch) {
-    @bottom-center {
-        content: counter(page);
-    }
-    }
+
+        @bottom-center {
+            content: counter(page);
+        }
+
     }
 
     img {
