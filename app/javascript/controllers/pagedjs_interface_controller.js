@@ -18,9 +18,10 @@ export default class extends Controller {
 
     // Baseline logic
     initBaseline() {
-        let toggle = localStorage.getItem('baselineToggle' + this.fileTitle)
-        let size = localStorage.getItem('baselineSize' + this.fileTitle)
-        let pos = localStorage.getItem('baselinePosition')
+        let toggle = this.getLocalStorage('baselineToggle')
+        let toggleMarginbox = this.getLocalStorage('marginboxToggle')
+        let size = this.getLocalStorage('baselineSize')
+        let pos = this.getLocalStorage('baselinePosition')
 
         if (toggle === "baseline") {
             this.body.classList.remove('no-baseline')
@@ -29,32 +30,41 @@ export default class extends Controller {
         } else {
             this.body.classList.add('no-baseline')
             this.baselineButtonTarget.textContent = "see"
-            localStorage.setItem('baselineToggle' + this.fileTitle, 'no-baseline')
+            this.setLocalStorage('baselineToggle', 'no-baseline')
+        }
+
+        if (toggleMarginbox === "marginboxes") {
+            this.body.classList.remove('no-marginboxes')
+            this.marginboxButtonTarget.textContent = "hide"
+        } else {
+            this.body.classList.add('no-marginboxes')
+            this.marginboxButtonTarget.textContent = "see"
+            this.setLocalStorage('marginboxToggle', 'no-marginboxes')
         }
 
         if (size) {
             this.baselineSizeTarget.value = size
             document.documentElement.style.setProperty('--pagedjs-baseline', size + 'px')
         } else {
-            localStorage.setItem('baselineSize' + this.fileTitle, this.baselineSizeTarget.value)
+            this.setLocalStorage('baselineSize', this.baselineSizeTarget.value)
         }
 
         if (pos) {
             this.baselinePositionTarget.value = pos
             document.documentElement.style.setProperty('--pagedjs-baseline-position', pos + 'px')
         } else {
-            localStorage.setItem('baselinePosition', this.baselinePositionTarget.value)
+            this.setLocalStorage('baselinePosition', this.baselinePositionTarget.value)
         }
     }
 
     toggleBaseline() {
         if (this.baselineToggleTarget.checked) {
             this.body.classList.remove('no-baseline')
-            localStorage.setItem('baselineToggle' + this.fileTitle, 'baseline')
+            this.setLocalStorage('baselineToggle', 'baseline')
             this.baselineButtonTarget.textContent = "hide"
         } else {
             this.body.classList.add('no-baseline')
-            localStorage.setItem('baselineToggle' + this.fileTitle, 'no-baseline')
+            this.setLocalStorage('baselineToggle', 'no-baseline')
             this.baselineButtonTarget.textContent = "see"
         }
     }
@@ -62,22 +72,24 @@ export default class extends Controller {
     changeBaselineSize() {
         let v = this.baselineSizeTarget.value
         document.documentElement.style.setProperty('--pagedjs-baseline', v + 'px')
-        localStorage.setItem('baselineSize' + this.fileTitle, v)
+        this.setLocalStorage('baselineSize', v)
     }
 
     changeBaselinePosition() {
         let v = this.baselinePositionTarget.value
         document.documentElement.style.setProperty('--pagedjs-baseline-position', v + 'px')
-        localStorage.setItem('baselinePosition', v)
+        this.setLocalStorage('baselinePosition', v)
     }
 
     toggleMarginbox() {
         if (this.marginboxToggleTarget.checked) {
             this.body.classList.remove('no-marginboxes')
             this.marginboxButtonTarget.textContent = "hide"
+            this.setLocalStorage('marginboxToggle', 'marginboxes')
         } else {
             this.body.classList.add('no-marginboxes')
             this.marginboxButtonTarget.textContent = "see"
+            this.setLocalStorage('marginboxToggle', 'no-marginboxes')
         }
     }
 
@@ -101,5 +113,15 @@ export default class extends Controller {
         const url = new URL(window.location.href);
         url.searchParams.set('format', 'pdf');
         window.open(url.toString(), '_blank');
+    }
+
+    setLocalStorage(key, value) {
+        if (window.location.protocol === "data:") return;
+        localStorage.setItem(key + this.fileTitle, value);
+    }
+
+    getLocalStorage(key) {
+        if (window.location.protocol === "data:") return;
+        return localStorage.getItem(key + this.fileTitle);
     }
 }
