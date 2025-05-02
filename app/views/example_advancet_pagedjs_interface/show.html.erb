@@ -8,9 +8,10 @@
 <% end %>
 
 <div class="interface-bar-bottom"
-     data-controller="pagedjs"
+     data-controller="pagedjs reload-in-place"
      data-pagedjs-stylesheets-value="<%= ["pagedjs/reset", "fonts/VG5000/vg5000", "example_advancet_pagedjs_interface/print"].map { |stylesheet| asset_url(stylesheet, type: :stylesheet) }.to_json %>"
      data-pagedjs-clear-content-value="false"
+     data-action="pagedjs:pages-ready@window->reload-in-place#handlePagesReady"
 >
 
   <%= render partial: "interface" %>
