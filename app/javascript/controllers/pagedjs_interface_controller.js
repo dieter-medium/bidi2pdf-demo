@@ -98,6 +98,8 @@ export default class extends Controller {
     }
 
     print(event) {
-        window.print();
+        const url = new URL(window.location.href);
+        url.searchParams.set('format', 'pdf');
+        window.open(url.toString(), '_blank');
     }
 }
