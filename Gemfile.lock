@@ -9,7 +9,7 @@ GIT
 
 GIT
   remote: https://github.com/dieter-medium/bidi2pdf.git
-  revision: b3c129ded7759812e4aadd9a7f1541914ecc67c2
+  revision: f9eb6a5dbec09f8697e5e29adf3c2f738fe3c413
   branch: main
   specs:
     bidi2pdf (0.1.8)
