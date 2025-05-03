@@ -1,0 +1,21 @@
+<section class="technical-section">
+  <h3>Details</h3>
+  <div class="section-content">
+
+    <div class="label">Category</div>
+    <div class="value">
+      <%= product["Category"] %>
+    </div>
+    <div class="label">Main Category</div>
+    <div class="value"><%= product["MainCategory"] %></div>
+
+    <div class="label">Supplier</div>
+    <div class="value"><%= product["SupplierName"] %></div>
+
+    <div class="label">Dimensions</div>
+    <div class="value"><%= "#{product['DimensionWidth']} × #{product['DimensionDepth']} × #{product['DimensionHeight']} #{product['DimensionUnit']}" %></div>
+
+    <div class="label">Weight</div>
+    <div class="value"><%= "#{product['Weight']} #{product['WeightUnit']}" %></div>
+  </div>
+</section>

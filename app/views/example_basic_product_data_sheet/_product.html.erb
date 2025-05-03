@@ -1,0 +1,12 @@
+<%# locals: (product:) %>
+
+<section class="product">
+  <%= render partial: 'logo_area', locals: { product: product } %>
+  <%= render partial: 'product_header', locals: { product: product } %>
+  <%= render partial: 'product_images', locals: { product: product } %>
+  <div class="infos">
+    <%= render partial: 'technical_details', locals: { product: product } %>
+    <%= render partial: 'packaging_details', locals: { product: product } %>
+  </div>
+  <%= render partial: 'price', locals: { product: product } %>
+</section>

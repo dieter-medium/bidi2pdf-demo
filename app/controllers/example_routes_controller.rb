@@ -22,6 +22,16 @@ class ExampleRoutesController < ApplicationController
         repo_text: "pagedjs/starter-kits/book_avanced-interface",
         url: example_advanced_pagedjs_interface_url,
         pdf_url: example_advanced_pagedjs_interface_url(format: :pdf)
+      },
+      {
+        title: "Basic Product Data Sheet",
+        controller: "ExampleBasicProductDataSheetController",
+        action: "show",
+        description: "This page demonstrates a basic product data sheet example, inspired by",
+        repo_url: "https://github.com/CSS-Paged-Media/printcss-example-code/tree/main",
+        repo_text: "CSS-Paged-Media/printcss-example-code",
+        url: example_basic_product_data_sheet_url,
+        pdf_url: example_basic_product_data_sheet_url(format: :pdf)
       }
     ]
   end

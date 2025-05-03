@@ -17,7 +17,7 @@
   <link rel="icon" href="/icon.svg" type="image/svg+xml">
   <link rel="apple-touch-icon" href="/icon.png">
 
-  <%= stylesheet_link_tag "boostrap.5.3.2.min", "data-turbo-track": "reload" %>
+  <%= stylesheet_link_tag "boostrap.5.3.2.min", "data-turbo-track": "reload" unless @bootstrap_disabled %>
 
   <%= javascript_importmap_tags %>
 </head>

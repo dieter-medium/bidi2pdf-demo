@@ -1,4 +1,5 @@
 Rails.application.routes.draw do
+  get "example_basic_product_data_sheet/show", as: :example_basic_product_data_sheet
   get "example_advanced_pagedjs_interface/show", as: :example_advanced_pagedjs_interface
   get "example_book_spread/show", as: :example_book_spread
 

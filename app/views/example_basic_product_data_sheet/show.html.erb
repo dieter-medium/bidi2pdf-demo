@@ -1,0 +1,20 @@
+<% content_for :title, "Basic Product Data Sheet" %>
+<% content_for :head do %>
+  <%= stylesheet_link_tag "example_basic_product_data_sheet/interface", "data-turbo-track": "reload" %>
+<% end %>
+
+<div
+  class="interface-bar-bottom"
+  data-controller="pagedjs"
+  data-pagedjs-stylesheets-value="<%= ["example_basic_product_data_sheet/print"].map { |stylesheet| asset_url(stylesheet, type: :stylesheet) }.to_json %>"
+  data-pagedjs-clear-content-value="false"
+  data-action="pagedjs:pages-ready@window->reload-in-place#handlePagesReady"
+>
+
+  <div data-pagedjs-target="rendered"></div>
+
+  <template data-pagedjs-target="content">
+    <%= render partial: 'product', collection: @products, as: :product %>
+  </template>
+
+</div>
