@@ -1,0 +1,113 @@
+@import url("https://fonts.googleapis.com/css2?family=Oswald&family=Pacifico&display=swap");
+
+@page {
+    size: 101.6mm 152.4mm;
+    margin: 30mm 2mm 10mm 2mm;
+    bleed: 5mm;
+    marks: crop;
+
+    @top-left {
+        content: element(runningheader);
+        height: 100%;
+        width: 100%;
+        background-color: #000;
+    }
+
+    @bottom-left {
+        content: element(runningfooter);
+        height: 100%;
+        width: 100%;
+        background-color: #000;
+    }
+}
+
+section.label {
+    border: 1mm solid #000;
+    padding: 0;
+    margin: 0;
+    height: 112.36mm;
+    font-family: "Oswald", sans-serif;
+}
+
+ol.total {
+    list-style-type: none;
+}
+
+ol.total > li {
+    border-top: 0.5mm solid #000;
+}
+
+ol {
+    list-style-type: decimal-leading-zero;
+}
+
+li {
+    font-size: 16pt;
+}
+
+li > .details {
+    font-size: 12pt;
+}
+
+li > b {
+    margin: 0;
+    padding: 0;
+}
+
+.running-header {
+    position: running(runningheader);
+    padding: 2.5mm 0 2.5mm 5mm;
+    white-space: nowrap;
+    align-items: center;
+}
+
+.running-header > div:first-child {
+    float: left;
+}
+
+.running-header > .qrcode {
+    float: right;
+}
+
+.running-header > div > h1 {
+    color: #fff;
+    margin: 0;
+    font-size: 16pt;
+}
+
+.running-header > div > h1 > span {
+    margin-left: 5mm;
+}
+
+.running-header .qrcode {
+    height: 30mm;
+    width: 30mm;
+    padding: 1mm;
+    background-color: #0dcaf0;
+}
+
+.running-header::after {
+    content: "";
+    display: table; /* clearfix */
+    clear: both;
+}
+
+.running-footer {
+    position: running(runningfooter);
+}
+
+.running-footer h3 {
+    margin: 0;
+    font-size: 16pt;
+    font-style: italic;
+    color: #fff;
+    padding: 2.5mm 5mm 2.5mm 5mm;
+}
+
+.oswald {
+    font-family: "Oswald", sans-serif;
+}
+
+.pacifico {
+    font-family: "Pacifico", cursive;
+}

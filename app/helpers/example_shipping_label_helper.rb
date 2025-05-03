@@ -1,0 +1,2 @@
+module ExampleShippingLabelHelper
+end

@@ -32,6 +32,16 @@ class ExampleRoutesController < ApplicationController
         repo_text: "CSS-Paged-Media/printcss-example-code",
         url: example_basic_product_data_sheet_url,
         pdf_url: example_basic_product_data_sheet_url(format: :pdf)
+      },
+      {
+        title: "Shipping Label Example",
+        controller: "ExampleShippingLabelController",
+        action: "show",
+        description: "This page demonstrates a shipping label example, inspired by",
+        repo_url: "https://github.com/CSS-Paged-Media/printcss-example-code/tree/main",
+        repo_text: "HTML Examples/E-Commerce Examples/Shipping Label",
+        url: example_shipping_label_url,
+        pdf_url: example_shipping_label_url(format: :pdf)
       }
     ]
   end
