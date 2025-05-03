@@ -25,7 +25,8 @@ This app is **fully configured for GitHub Codespaces**.
 
 1. **Fork** this repo
 2. **Open** in a GitHub Codespace
-3. **Start the Rails server**:
+3. **Wait** for the container to build and bin/setup is run (it may take a few minutes)
+4. **Start the Rails server**:
 
 ```bash
 ./bin/rails s -b 0.0.0.0
