@@ -1,6 +1,6 @@
 GIT
   remote: https://github.com/dieter-medium/bidi2pdf-rails.git
-  revision: f1c29f0dbce1c01b2fe7527e472cf0c1a8c0265a
+  revision: 934e165af67b28f04592a2443a5cacb674bb3566
   branch: main
   specs:
     bidi2pdf-rails (0.1.1)
@@ -9,7 +9,7 @@ GIT
 
 GIT
   remote: https://github.com/dieter-medium/bidi2pdf.git
-  revision: b3c129ded7759812e4aadd9a7f1541914ecc67c2
+  revision: b536d27e3bae5fabcb47bced0e011a4d230295c2
   branch: main
   specs:
     bidi2pdf (0.1.8)
@@ -220,7 +220,7 @@ GEM
       activesupport (>= 7.0.0)
       rack
       railties (>= 7.0.0)
-    psych (5.2.3)
+    psych (5.2.4)
       date
       stringio
     puma (6.6.0)
