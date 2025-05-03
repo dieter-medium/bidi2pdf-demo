@@ -1,9 +1,9 @@
 class ExampleBasicProductDataSheetController < ApplicationController
   def show
-    # load the first 5 products from Rails.root.join("vendor", "openui5", "mockdata", "Products.json")
     products = JSON.parse(File.read(Rails.root.join("vendor", "openui5", "mockdata", "Products.json")))
 
-    @products = products.first(5)
+    @products = products.first(50)
+
     @bootstrap_disabled = true
 
     respond_to do |format|

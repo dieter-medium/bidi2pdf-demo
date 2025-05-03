@@ -14,7 +14,7 @@ Bidi2pdfRails.configure do |config|
   config.general_options.wait_for_page_loaded = true # Wait for page loaded
   # config.general_options.wait_for_page_check_script = nil # Wait for page check script
   # config.general_options.notification_service = -> { ActiveSupport::Notifications } # Notification service
-  # config.general_options.default_timeout = 10 # Default timeout for various Bidi commands
+  config.general_options.default_timeout = 30 # Default timeout for various Bidi commands
   # config.general_options.chrome_session_args = ["--disable-gpu", "--disable-popup-blocking", "--disable-hang-monitor"] # Chrome session arguments
 
   chrome_session_args = Bidi2pdf::Bidi::Session::DEFAULT_CHROME_ARGS.dup
