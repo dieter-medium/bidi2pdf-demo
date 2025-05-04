@@ -3,6 +3,8 @@ Rails.application.routes.draw do
   get "example_basic_product_data_sheet/show", as: :example_basic_product_data_sheet
   get "example_advanced_pagedjs_interface/show", as: :example_advanced_pagedjs_interface
   get "example_book_spread/show", as: :example_book_spread
+  get "example_async_pdf/generate", as: :example_async_pdf_generate
+  get "example_async_pdf/progress/:id", to: "example_async_pdf#progress", as: :example_async_pdf_progress
 
   # Reveal health status on /up that returns 200 if the app boots with no exceptions, otherwise 500.
   # Can be used by load balancers and uptime monitors to verify that the app is live.

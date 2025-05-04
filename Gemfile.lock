@@ -1,27 +1,3 @@
-GIT
-  remote: https://github.com/dieter-medium/bidi2pdf-rails.git
-  revision: 934e165af67b28f04592a2443a5cacb674bb3566
-  branch: main
-  specs:
-    bidi2pdf-rails (0.1.1)
-      bidi2pdf (>= 0.1.8)
-      rails (>= 7.2.2.1, < 8.0.3.0)
-
-GIT
-  remote: https://github.com/dieter-medium/bidi2pdf.git
-  revision: b536d27e3bae5fabcb47bced0e011a4d230295c2
-  branch: main
-  specs:
-    bidi2pdf (0.1.8)
-      base64 (~> 0.2.0)
-      chromedriver-binary
-      concurrent-ruby (~> 1.0, >= 1.3.1)
-      json (~> 2.10)
-      rubyzip (~> 2.4)
-      sys-proctable (~> 1.3)
-      thor (~> 1.3)
-      websocket-client-simple (~> 0.9.0)
-
 GEM
   remote: https://rubygems.org/
   specs:
@@ -100,6 +76,18 @@ GEM
     base64 (0.2.0)
     bcrypt_pbkdf (1.1.1)
     benchmark (0.4.0)
+    bidi2pdf (0.1.9)
+      base64 (~> 0.2.0)
+      chromedriver-binary
+      concurrent-ruby (~> 1.0, >= 1.3.1)
+      json (~> 2.10)
+      rubyzip (~> 2.4)
+      sys-proctable (~> 1.3)
+      thor (~> 1.3)
+      websocket-client-simple (~> 0.9.0)
+    bidi2pdf-rails (0.1.2)
+      bidi2pdf (>= 0.1.9)
+      rails (>= 7.2.2.1, < 8.0.3.0)
     bigdecimal (3.1.9)
     bindex (0.8.1)
     bootsnap (1.18.4)
@@ -390,8 +378,8 @@ PLATFORMS
   x86_64-linux-musl
 
 DEPENDENCIES
-  bidi2pdf!
-  bidi2pdf-rails!
+  bidi2pdf
+  bidi2pdf-rails
   bootsnap
   brakeman
   debug

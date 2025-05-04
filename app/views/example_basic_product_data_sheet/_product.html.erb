@@ -1,12 +1,12 @@
 <%# locals: (product:) %>
 
 <section class="product">
-  <%= render partial: 'logo_area', locals: { product: product } %>
-  <%= render partial: 'product_header', locals: { product: product } %>
-  <%= render partial: 'product_images', locals: { product: product } %>
+  <%= render partial: 'example_basic_product_data_sheet/logo_area', locals: { product: product } %>
+  <%= render partial: 'example_basic_product_data_sheet/product_header', locals: { product: product } %>
+  <%= render partial: 'example_basic_product_data_sheet/product_images', locals: { product: product } %>
   <div class="infos">
-    <%= render partial: 'technical_details', locals: { product: product } %>
-    <%= render partial: 'packaging_details', locals: { product: product } %>
+    <%= render partial: 'example_basic_product_data_sheet/technical_details', locals: { product: product } %>
+    <%= render partial: 'example_basic_product_data_sheet/packaging_details', locals: { product: product } %>
   </div>
-  <%= render partial: 'price', locals: { product: product } %>
+  <%= render partial: 'example_basic_product_data_sheet/price', locals: { product: product } %>
 </section>

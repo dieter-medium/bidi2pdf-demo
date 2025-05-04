@@ -42,6 +42,13 @@ class ExampleRoutesController < ApplicationController
         repo_text: "HTML Examples/E-Commerce Examples/Shipping Label",
         url: example_shipping_label_url,
         pdf_url: example_shipping_label_url(format: :pdf)
+      },
+      {
+        title: "Async PDF Generation",
+        controller: "ExampleAsyncPdfController",
+        action: "generate",
+        description: "This page demonstrates how to generate a PDF asynchronously using ActiveJob and ActionCable.",
+        url: example_async_pdf_generate_url
       }
     ]
   end

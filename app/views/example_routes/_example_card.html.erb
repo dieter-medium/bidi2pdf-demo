@@ -9,17 +9,21 @@
       <h5 class="card-title"><%= example[:title] %></h5>
       <p class="card-text flex-grow-1 mb-3">
         <%= example[:description] %>
-        <a href="<%= example[:repo_url] %>" target="_blank" rel="noopener">
-          <%= example[:repo_text] %>
-        </a>.
+        <% if example[:repo_url] %>
+          <a href="<%= example[:repo_url] %>" target="_blank" rel="noopener">
+            <%= example[:repo_text] %>
+          </a>.
+        <% end %>
       </p>
       <div class="mt-auto">
         <a href="<%= example[:url] %>" class="btn btn-primary btn-sm">
           View HTML
         </a>
-        <a href="<%= example[:pdf_url] %>" class="btn btn-outline-secondary btn-sm">
-          View PDF
-        </a>
+        <% if example[:pdf_url] %>
+          <a href="<%= example[:pdf_url] %>" class="btn btn-outline-secondary btn-sm">
+            View PDF
+          </a>
+        <% end %>
       </div>
     </div>
   </div>
