@@ -21,21 +21,28 @@ test:
   database: storage/test.sqlite3
 
 
-# Store production database in the storage/ directory, which by default
-# is mounted as a persistent Docker volume in config/deploy.yml.
+default_prod: &default_prod
+  adapter: mysql2
+  encoding: utf8mb4
+  pool: <%= ENV.fetch("RAILS_MAX_THREADS") { 5 } %>
+  database: bidi2pdf_demo_production
+  username: <%= ENV['MYSQL_USER'] %>
+  password: <%= ENV['MYSQL_PASSWORD'] %>
+  host: <%= ENV.fetch("DB_HOST") { "127.0.0.1" } %>
+
+
 production:
   primary:
-    <<: *default
-    database: storage/production.sqlite3
+    <<: *default_prod
   cache:
-    <<: *default
-    database: storage/production_cache.sqlite3
+    <<: *default_prod
+    database: bidi2pdf_demo_production_cache
     migrations_paths: db/cache_migrate
   queue:
-    <<: *default
-    database: storage/production_queue.sqlite3
+    <<: *default_prod
+    database: bidi2pdf_demo_production_queue
     migrations_paths: db/queue_migrate
   cable:
-    <<: *default
-    database: storage/production_cable.sqlite3
+    <<: *default_prod
+    database: bidi2pdf_demo_production_cable
     migrations_paths: db/cable_migrate
