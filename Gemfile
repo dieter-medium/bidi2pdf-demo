@@ -67,3 +67,5 @@ gem "rack-cors", "~> 2.0"
 gem "rqrcode", "~> 3.1"
 
 gem "redis", "~> 5.4"
+
+gem "aws-sdk-s3", "~> 1.185"
