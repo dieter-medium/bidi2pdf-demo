@@ -1,0 +1,36 @@
+name: "docker-registry"
+
+services:
+  init-certs:
+    image: alpine:latest
+    command: "sh -c 'apk add openssl bash; cd /etc/cert; ./generate.sh'"
+    volumes:
+      - ./certs:/etc/cert:cached
+  nginx:
+    # Note : Only nginx:alpine supports bcrypt.
+    # If you don't need to use bcrypt, you can use a different tag.
+    # Ref. https://github.com/nginxinc/docker-nginx/issues/29
+    image: "nginx:alpine"
+    restart: unless-stopped
+    ports:
+      - 5043:443
+    environment:
+      OTEL_EXPORTER_OTLP_ENDPOINT: ""
+    depends_on:
+      registry:
+        condition: service_started
+      init-certs:
+        condition: service_completed_successfully
+
+    volumes:
+      - ./auth:/etc/nginx/conf.d
+      - ./certs:/etc/nginx/ssl
+      - ./auth/nginx.conf:/etc/nginx/nginx.conf:ro
+
+  registry:
+    image: registry:3
+    restart: unless-stopped
+    environment:
+      OTEL_EXPORTER_OTLP_ENDPOINT: ""
+    volumes:
+      - ./data:/var/lib/registry

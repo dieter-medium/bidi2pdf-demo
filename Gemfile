@@ -7,7 +7,7 @@ gem "propshaft"
 # Use sqlite3 as the database for Active Record
 gem "sqlite3", ">= 2.1"
 # production database
-gem 'mysql2'
+gem "mysql2"
 # Use the Puma web server [https://github.com/puma/puma]
 gem "puma", ">= 5.0"
 # Use JavaScript with ESM import maps [https://github.com/rails/importmap-rails]
@@ -69,3 +69,5 @@ gem "rqrcode", "~> 3.1"
 gem "redis", "~> 5.4"
 
 gem "aws-sdk-s3", "~> 1.185"
+
+gem "bcrypt"

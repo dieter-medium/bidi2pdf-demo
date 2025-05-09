@@ -52,11 +52,15 @@ module Bidi2pdfDemo
 
     if ENV["ALLOWED_HOSTS"]
       #  Additional comma-separated hosts
-      Rails.application.config.hosts << ENV["ALLOWED_HOSTS"]
+      ENV["ALLOWED_HOSTS"].split(",").each do |host|
+        config.hosts << host.strip
+      end
+
+      config.hosts << ENV["HOSTNAME"]
     end
 
-    Rails.application.config.host_authorization = {
-      exclude: ->(request) { request.path.include?("healthcheck") || request.path.include?("up") },
+    config.host_authorization = {
+      exclude: ->(request) { request.path.include?("healthcheck") || request.path.include?("up") }
     }
   end
 end
