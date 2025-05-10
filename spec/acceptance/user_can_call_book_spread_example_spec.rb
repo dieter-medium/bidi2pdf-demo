@@ -3,8 +3,12 @@ require "bidi2pdf/test_helpers/testcontainers"
 
 RSpec.feature "As a developer, I want to an example of book spread", :chromedriver, :pdf, type: :request do
   before do
-    with_render_setting :browser_url, session_url
-    with_pdf_settings :asset_host, "http://host.docker.internal:#{@port}"
+    if ENV["IN_DEV_CONTAINER"] && ENV["IN_DEV_CONTAINER"] == "true"
+      with_pdf_settings :asset_host, "http://rails-app:#{@port}/"
+    else
+      with_render_setting :browser_url, session_url
+      with_pdf_settings :asset_host, "http://host.docker.internal:#{@port}"
+    end
     Bidi2pdfRails::ChromedriverManagerSingleton.initialize_manager force: true
   end
 
