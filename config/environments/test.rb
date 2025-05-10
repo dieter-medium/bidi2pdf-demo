@@ -51,6 +51,8 @@ Rails.application.configure do
   # Raise error when a before_action's only/except options reference missing actions.
   config.action_controller.raise_on_missing_callback_actions = true
 
+  config.hosts = nil
+
   # --- BEGIN Bidi2PDF Settings ---
   # Custom Bidi2PDF settings, check config/initializers/bidi2pdf_rails.rb for hints
   # config.x.bidi2pdf_rails.headless = false
