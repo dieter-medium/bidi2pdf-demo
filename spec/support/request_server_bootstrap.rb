@@ -25,14 +25,10 @@ module RequestServerBootstrap
   def capybara_manages_server?
     defined?(Capybara) && Capybara.current_driver && Capybara.server
   end
-end
 
-RSpec.configure do |config|
-  config.include RequestServerBootstrap, type: :request
-
-  config.before(:all, type: :request) do
-    next if capybara_manages_server?
+  def start_server
     @port = find_available_port
+
     @server_thread = Thread.new do
       Rack::Handler::Puma.run Rails.application, Port: @port, Silent: false
     end
@@ -40,8 +36,21 @@ RSpec.configure do |config|
     wait_until_server_is_ready(@port)
   end
 
+  def stop_server
+    @server_thread&.exit
+  end
+end
+
+RSpec.configure do |config|
+  config.include RequestServerBootstrap, type: :request
+
+  config.before(:all, type: :request) do
+    next if capybara_manages_server?
+    start_server
+  end
+
   config.after(:all, type: :request) do
     next if capybara_manages_server?
-    @server_thread&.exit
+    stop_server
   end
 end

@@ -2,8 +2,16 @@
 
 module PdfHelper
   def get_pdf_response(path)
-    uri = URI(path.starts_with?("http") ? path : "http://localhost:#{@port}#{path}")
+    uri = URI(path.starts_with?("http") ? path : "http://#{rails_host}:#{@port}#{path}")
     Net::HTTP.get_response(uri)
+  end
+
+  def rails_host
+    if ENV["CI"]
+      Socket.gethostname
+    else
+      "localhost"
+    end
   end
 
   def follow_redirects(response, max_redirects = 10)

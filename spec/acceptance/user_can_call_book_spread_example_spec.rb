@@ -1,18 +1,33 @@
 require "rails_helper"
+require "docker"
 require "bidi2pdf/test_helpers/testcontainers"
+require "pp"
 
 RSpec.feature "As a developer, I want to an example of book spread", :chromedriver, :pdf, type: :request do
+  before :all do
+    if ENV["CI"] && false
+      container_id = Socket.gethostname
+      container = Docker::Container.get(container_id)
+
+      RSpec.configuration.shared_network&.connect(container.id, nil, { "EndpointConfig" => { "Aliases" => [ "my-rails-app" ] } })
+
+      stop_server
+      start_server
+    end
+
+    pp RSpec.configuration.chromedriver_container.info
+  end
+
   before do
     if ENV["IN_DEV_CONTAINER"] && ENV["IN_DEV_CONTAINER"] == "true"
       with_pdf_settings :asset_host, "http://rails-app:#{@port}/"
     else
       with_render_setting :browser_url, session_url
       if ENV["CI"]
-        with_pdf_settings :asset_host, "http://#{Socket.gethostname}:#{@port}"
+        with_pdf_settings :asset_host, "http://host.docker.internal:#{@port}"
       else
         with_pdf_settings :asset_host, "http://host.docker.internal:#{@port}"
       end
-
     end
     Bidi2pdfRails::ChromedriverManagerSingleton.initialize_manager force: true
   end
