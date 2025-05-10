@@ -57,7 +57,7 @@ RSpec.configure do |config|
   # Allows RSpec to persist some state between runs in order to support
   # the `--only-failures` and `--next-failure` CLI options. We recommend
   # you configure your source control system to ignore this file.
-  config.example_status_persistence_file_path = "spec/examples.txt"
+  config.example_status_persistence_file_path = ".rspec_status"
 
   # Limits the available syntax to the non-monkey patched syntax that is
   # recommended. For more details, see:
@@ -90,4 +90,21 @@ RSpec.configure do |config|
   # test failures related to randomization by passing the same `--seed` value
   # as the one that triggered the failure.
   Kernel.srand config.seed
+
+  config.define_derived_metadata(file_path: %r{/spec/unit/}) do |metadata|
+    metadata[:unit] = true
+  end
+
+  config.define_derived_metadata(file_path: %r{/spec/integration/}) do |metadata|
+    metadata[:integration] = true
+  end
+
+  config.define_derived_metadata(file_path: %r{/spec/acceptance/}) do |metadata|
+    metadata[:acceptance] = true
+  end
+
+  config.add_setting :spec_dir, default: File.expand_path(__dir__)
 end
+
+require_relative "support/default_dirs_helper"
+require "bidi2pdf/test_helpers"
