@@ -7,7 +7,12 @@ RSpec.feature "As a developer, I want to an example of book spread", :chromedriv
       with_pdf_settings :asset_host, "http://rails-app:#{@port}/"
     else
       with_render_setting :browser_url, session_url
-      with_pdf_settings :asset_host, "http://host.docker.internal:#{@port}"
+      if ENV["CI"]
+        with_pdf_settings :asset_host, "http://#{Socket.gethostname}:#{@port}"
+      else
+        with_pdf_settings :asset_host, "http://host.docker.internal:#{@port}"
+      end
+
     end
     Bidi2pdfRails::ChromedriverManagerSingleton.initialize_manager force: true
   end
