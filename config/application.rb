@@ -49,5 +49,18 @@ module Bidi2pdfDemo
       regex = /\A#{Regexp.escape(codespace)}-\d+\.app\.github\.dev\z/
       config.hosts << regex
     end
+
+    if ENV["ALLOWED_HOSTS"]
+      #  Additional comma-separated hosts
+      ENV["ALLOWED_HOSTS"].split(",").each do |host|
+        config.hosts << host.strip
+      end
+
+      config.hosts << ENV["HOSTNAME"]
+    end
+
+    config.host_authorization = {
+      exclude: ->(request) { request.path.include?("healthcheck") || request.path.include?("up") }
+    }
   end
 end

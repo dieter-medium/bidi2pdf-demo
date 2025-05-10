@@ -1,0 +1,11 @@
+#!/usr/bin/env ruby
+
+require "kamal"
+require_relative "ssh_helper"
+
+config_file = Pathname.new(File.expand_path("../../config/deploy.yml", __dir__))
+config = Kamal::Configuration.create_from(config_file:)
+
+ssh = SSHHelper.new(config)
+
+ssh.init_minio ENV["KAMAL_HOSTS"].split(",")

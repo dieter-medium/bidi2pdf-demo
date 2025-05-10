@@ -1,0 +1,22 @@
+[req]
+encrypt_key = no
+req_extensions = v3_req         # Corrected from 'req_extension'
+distinguished_name = req_subj
+prompt = no
+
+[req_subj]
+countryName = DE
+localityName = SomeCity
+organizationName = My Acme
+organizationalUnitName = My Acme    # Corrected spelling
+emailAddress = test@test.local      # Corrected spelling and removed stray %
+
+[v3_req]
+basicConstraints = CA:FALSE
+keyUsage = nonRepudiation, digitalSignature, keyEncipherment
+subjectAltName = @alt_names
+
+[alt_names]
+DNS.1 = localhost
+IP.1 = <%= config.primary_host %>
+

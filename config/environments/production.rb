@@ -22,20 +22,20 @@ Rails.application.configure do
   # config.asset_host = "http://assets.example.com"
 
   # Store uploaded files on the local file system (see config/storage.yml for options).
-  config.active_storage.service = :local
+  config.active_storage.service = :minio
 
   # Assume all access to the app is happening through a SSL-terminating reverse proxy.
-  config.assume_ssl = true
+  config.assume_ssl = !ENV.key?("DISABLE_SSL")
 
   # Force all access to the app over SSL, use Strict-Transport-Security, and use secure cookies.
-  config.force_ssl = true
+  config.force_ssl = !ENV.key?("DISABLE_SSL")
 
   # Skip http-to-https redirect for the default health check endpoint.
   # config.ssl_options = { redirect: { exclude: ->(request) { request.path == "/up" } } }
 
   # Log to STDOUT with the current request id as a default log tag.
   config.log_tags = [ :request_id ]
-  config.logger   = ActiveSupport::TaggedLogging.logger(STDOUT)
+  config.logger = ActiveSupport::TaggedLogging.logger(STDOUT)
 
   # Change to "debug" to log everything (including potentially personally-identifiable information!)
   config.log_level = ENV.fetch("RAILS_LOG_LEVEL", "info")
@@ -93,7 +93,7 @@ Rails.application.configure do
   # config.x.bidi2pdf_rails.headless = false
   # config.x.bidi2pdf_rails.verbosity = :high
   # config.x.bidi2pdf_rails.log_browser_console = true
-  # config.x.bidi2pdf_rails.default_timeout = 60
+  config.x.bidi2pdf_rails.browser_url = ENV["REMOTE_BROWSER_URL"]
 
   # takes care of asset host settings when rendering views directly
   Bidi2pdfRails::Services::AssetHostManager.override_asset_host!(config)

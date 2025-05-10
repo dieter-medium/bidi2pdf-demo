@@ -1,0 +1,15 @@
+#!/usr/bin/env ruby
+
+require "kamal"
+require "bcrypt" #
+require "stringio"
+require "erb"
+require_relative "ssh_helper"
+
+config_file = Pathname.new(File.expand_path("../../config/deploy.yml", __dir__))
+
+config = Kamal::Configuration.create_from(config_file:)
+
+ssh = SSHHelper.new(config)
+
+ssh.patch_docker_hosts ENV["KAMAL_HOSTS"].split(",")

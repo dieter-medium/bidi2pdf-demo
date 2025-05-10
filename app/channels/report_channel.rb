@@ -19,7 +19,7 @@ class ReportChannel < Turbo::StreamsChannel
       target: "report-status",
       partial: "example_async_pdf/pdf_frame",
       locals: { url: url_for(report.pdf) }
-    )
+    ) if report&.pdf&.attached?
   end
 
   def subscription_allowed?

@@ -88,8 +88,11 @@ Bidi2pdfRails.configure do |config|
 
   # Values can be used from the environment or from the config file.
   # with the following pattern:
-  # overrides = Rails.application.config.x.bidi2pdf_rails
-  # config.general_options.verbosity = overrides.verbosity if overrides.verbosity
+  overrides = Rails.application.config.x.bidi2pdf_rails
+
+  if overrides.browser_url
+    config.render_remote_settings.browser_url = overrides.browser_url
+  end
 end
 
 Rails.application.config.after_initialize do |_app|

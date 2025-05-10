@@ -9,9 +9,12 @@ test:
   adapter: test
 
 production:
-  adapter: solid_cable
-  connects_to:
-    database:
-      writing: cable
-  polling_interval: 0.1.seconds
-  message_retention: 1.day
+  # adapter: solid_cable
+  # connects_to:
+  #    database:
+  #    writing: cable
+  # polling_interval: 0.1.seconds
+  # message_retention: 1.day
+  adapter: redis
+  url: redis://redis:6379
+  channel_prefix: bidi2pdf_demo

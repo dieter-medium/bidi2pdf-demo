@@ -1,3 +1,10 @@
+<%
+    require "dotenv"; Dotenv.load(".env")
+    %w[SERVER_IP USER_ID GROUP_ID].each do |key|
+      raise "Missing ENV variable #{key}" unless ENV[key]
+    end
+%>
+
 # Name of your application. Used to uniquely configure containers.
 service: bidi2pdf_demo
 
@@ -7,25 +14,25 @@ image: your-user/bidi2pdf_demo
 # Deploy to these servers.
 servers:
   web:
-    - 192.168.0.1
-  # job:
-  #   hosts:
-  #     - 192.168.0.1
-  #   cmd: bin/jobs
+    - <%= ENV["SERVER_IP"] %>
+  job:
+    hosts:
+      - <%= ENV["SERVER_IP"] %>
+    cmd: bin/jobs
 
 # Enable SSL auto certification via Let's Encrypt and allow for multiple apps on a single web server.
 # Remove this section when using multiple web servers and ensure you terminate SSL at your load balancer.
 #
 # Note: If using Cloudflare, set encryption mode in SSL/TLS setting to "Full" to enable CF-to-app encryption.
 proxy:
-  ssl: true
-  host: app.example.com
+  ssl: false
+  # host: app.example.com
 
 # Credentials for your image host.
 registry:
   # Specify the registry server, if you're not using Docker Hub
-  # server: registry.digitalocean.com / ghcr.io / ...
-  username: your-user
+  server: <%= ENV["SERVER_IP"] %>:5043
+  username: testuser
 
   # Always use an access token rather than real password when possible.
   password:
@@ -35,23 +42,34 @@ registry:
 env:
   secret:
     - RAILS_MASTER_KEY
+    - MYSQL_PASSWORD
+    - MINIO_ROOT_PASSWORD
   clear:
     # Run the Solid Queue Supervisor inside the web server's Puma process to do jobs.
     # When you start using multiple servers, you should split out job processing to a dedicated machine.
-    SOLID_QUEUE_IN_PUMA: true
+    SOLID_QUEUE_IN_PUMA: false
+    REMOTE_BROWSER_URL: "http://remote-chrome:3000/session"
+    ALLOWED_HOSTS: <%= ENV["SERVER_IP"] %>
+    DISABLE_SSL: true
+    DB_HOST: mysql
+    MYSQL_DATABASE: bidi2pdf_demo_production
+    MYSQL_USER: bidi2pdf
+    MINIO_BUCKET: application
+    MINIO_ENDPOINT: "http://<%= ENV["SERVER_IP"] %>:9000"
+    MINIO_ACCESS_KEY_ID: minio
 
-    # Set number of processes dedicated to Solid Queue (default: 1)
-    # JOB_CONCURRENCY: 3
+  # Set number of processes dedicated to Solid Queue (default: 1)
+  # JOB_CONCURRENCY: 3
 
-    # Set number of cores available to the application on each server (default: 1).
-    # WEB_CONCURRENCY: 2
+  # Set number of cores available to the application on each server (default: 1).
+  # WEB_CONCURRENCY: 2
 
-    # Match this to any external database server to configure Active Record correctly
-    # Use bidi2pdf_demo-db for a db accessory server on same machine via local kamal docker network.
-    # DB_HOST: 192.168.0.2
+  # Match this to any external database server to configure Active Record correctly
+  # Use bidi2pdf_demo-db for a db accessory server on same machine via local kamal docker network.
+  # DB_HOST: 192.168.0.2
 
-    # Log everything from Rails
-    # RAILS_LOG_LEVEL: debug
+  # Log everything from Rails
+  # RAILS_LOG_LEVEL: debug
 
 # Aliases are triggered with "bin/kamal <alias>". You can overwrite arguments on invocation:
 # "bin/kamal logs -r job" will tail logs from the first server in the job section.
@@ -88,29 +106,76 @@ builder:
   #   - RAILS_MASTER_KEY
 
 # Use a different ssh user than root
-# ssh:
-#   user: app
+ssh:
+  user: kamal
 
 # Use accessory services (secrets come from .kamal/secrets).
-# accessories:
-#   db:
-#     image: mysql:8.0
-#     host: 192.168.0.2
-#     # Change to 3306 to expose port to the world instead of just local network.
-#     port: "127.0.0.1:3306:3306"
-#     env:
-#       clear:
-#         MYSQL_ROOT_HOST: '%'
-#       secret:
-#         - MYSQL_ROOT_PASSWORD
-#     files:
-#       - config/mysql/production.cnf:/etc/mysql/my.cnf
-#       - db/production.sql:/docker-entrypoint-initdb.d/setup.sql
-#     directories:
-#       - data:/var/lib/mysql
-#   redis:
-#     image: redis:7.0
-#     host: 192.168.0.2
-#     port: 6379
-#     directories:
-#       - data:/data
+accessories:
+  remote-chrome:
+    image: dieters877565/chromedriver:latest
+    service: remote-chrome
+    roles:
+      - web
+    options:
+      "cap-add":
+        - SYS_ADMIN
+    env:
+      ENABLE_XVFB: false
+      ENABLE_VNC: false
+
+  mysql:
+    image: mysql:8.0
+    service: mysql
+    roles:
+      - web
+    #     # Change to 3306 to expose port to the world instead of just local network.
+    #     port: "127.0.0.1:3306:3306"
+    options:
+      user: "<%= "#{ENV["USER_ID"]}:#{ENV["GROUP_ID"]}" %>"
+    env:
+      clear:
+        MYSQL_ROOT_HOST: '%'
+        MYSQL_DATABASE: bidi2pdf_demo_production
+        MYSQL_USER: bidi2pdf
+
+      secret:
+        - MYSQL_ROOT_PASSWORD
+        - MYSQL_PASSWORD
+    files:
+      - config/mysql/production.cnf:/etc/mysql/my.cnf
+      - db/production.sh:/docker-entrypoint-initdb.d/setup.sh
+    directories:
+      - data:/var/lib/mysql
+  redis:
+    image: redis:7.0
+    service: redis
+    roles:
+      - web
+    #     port: 6379
+    options:
+      user: "<%= "#{ENV["USER_ID"]}:#{ENV["GROUP_ID"]}" %>"
+    directories:
+      - data:/data
+  minio:
+    image: minio/minio
+    service: minio
+    roles:
+      - web
+    options:
+      user: "<%= "#{ENV["USER_ID"]}:#{ENV["GROUP_ID"]}" %>"
+      # see https://github.com/basecamp/kamal/issues/347
+      publish:
+        - "9000:9000"
+        - "9001:9001"
+    # port: "9000:9000"
+    cmd: "server /data --console-address ':9001'"
+    env:
+      clear:
+        MINIO_ROOT_USER: minio
+        MINIO_DEFAULT_BUCKET: application
+      secret:
+        - MINIO_ROOT_PASSWORD
+    files:
+      - config/minio/create_bucket.sh:/create_bucket.sh
+    directories:
+      - data:/data
