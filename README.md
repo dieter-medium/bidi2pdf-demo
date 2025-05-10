@@ -1,83 +1,135 @@
 # 🚀 Rails 8 Demo App – GitHub Codespaces Ready
 
-This repository demonstrates how to generate PDFs from Rails views using
-**[`bidi2pdf-rails`](https://rubygems.org/gems/bidi2pdf-rails)** — a modern alternative to Grover or WickedPDF.
+This repository demonstrates how to generate high-fidelity PDFs from Rails views using  
+**[`bidi2pdf-rails`](https://rubygems.org/gems/bidi2pdf-rails)** — a modern, native alternative to Grover or WickedPDF.
+
+---
 
 ## 🔧 Key Technologies
 
-- **Rails 8** – Latest framework version
-- **bidi2pdf-rails** – PDF generation via the **BiDi protocol** of ChromeDriver
-- **Propshaft** – Lightweight asset pipeline
-- **Importmaps** – JavaScript without bundlers
-- **Stimulus** – JavaScript framework for modest interactivity
-- **Page.js** – Client-side navigation
+- **Rails 8** – The latest version of the Ruby on Rails framework
+- **bidi2pdf-rails** – PDF generation via ChromeDriver’s **BiDi (Bidirectional) protocol**
+- **Propshaft** – A lightweight, modern asset pipeline
+- **Importmaps** – JavaScript without bundlers or Node
+- **Stimulus** – A minimal JavaScript framework for progressive enhancements
+- **Page.js** – Fast, client-side navigation with zero SPA overhead
 
-> **Purpose:** Show how to use `bidi2pdf-rails` to generate high-fidelity PDFs from Rails views **using the native
-browser automation capabilities of Chrome (BiDi protocol)**, eliminating the need for tools like Grover or wkhtmltopdf.
+> **Goal:** Showcase how to leverage `bidi2pdf-rails` for clean, browser-accurate PDF rendering inside Rails, using
+> Chrome’s native BiDi protocol—no Puppeteer, no wkhtmltopdf, no hassle.
 
 ---
 
 ## ☁️ Instant Setup with GitHub Codespaces
 
-This app is **fully configured for GitHub Codespaces**.
+This app is **fully preconfigured for GitHub Codespaces**, making onboarding as smooth as possible.
 
-### 🏁 Get started:
+### 🏁 Getting Started:
 
-1. **Fork** this repo
-2. **Open** in a GitHub Codespace
-3. **Wait** for the container to build and bin/setup is run (it may take a few minutes)
+1. **Fork** this repository
+2. **Open** it in a GitHub Codespace
+3. **Wait** for the container to build and run `bin/setup` (takes a few minutes)
 4. **Start the Rails server**:
 
 ```bash
 ./bin/rails s -b 0.0.0.0
 ```
 
-> You'll access the app via the forwarded port shown in the Codespace interface.
+> Access the app via the forwarded port shown in the Codespace interface.
 
 ---
 
 ## 🖨️ PDF Generation with `bidi2pdf-rails`
 
-`bidi2pdf-rails` uses **ChromeDriver’s BiDi protocol** (Bidirectional WebDriver) to:
+The gem uses **ChromeDriver's BiDi protocol** to:
 
-- Control a Chromium instance directly from Rails
-- Render actual browser output into a PDF
-- Avoid flaky headless-browser setups like Puppeteer or wkhtmltopdf
-- Keep configuration minimal and embedded within your Rails stack
+- Launch and control a Chromium browser
+- Render full browser output to PDF
+- Avoid fragile, legacy PDF tools like wkhtmltopdf
+- Keep everything inside your Rails stack — no Node, no extra services
 
 ---
 
-## 🖥️ Optional: View Chromium via VNC
+## 🖥️ Optional: Visual Browser Rendering via VNC
 
-To visually inspect what Chromium renders, VNC is enabled inside the container.
+You can observe exactly what Chromium renders by connecting to the live browser instance through VNC.
 
-### 🔧 Setup VNC forwarding:
+### 🔧 VNC Setup Instructions:
 
 ```bash
-# Within codespaces
-# go to ports tab and forward port 5900
+# In your GitHub Codespace:
+# Open the "Ports" tab and forward port 5900
 
-# locally forward the remote port 59000 to 6000 local port
+# On your local machine:
 gh auth status
-# If not logged in:
+# If not authenticated:
 echo $GITHUB_TOKEN | gh auth login --with-token
 
 gh codespace list
 gh codespace ports forward 5900:6000
 ```
 
-### 🖥️ Connect:
+### 🖥️ Connect with VNC Viewer:
 
-- Open `vnc://localhost:6000` in a VNC viewer  
-  (On macOS: Finder → ⌘ + K → `vnc://localhost:6000`)
+- Open `vnc://localhost:6000` in your VNC viewer  
+  (macOS shortcut: Finder → ⌘ + K → enter the URL)
 
-- Password: set in `.devcontainer/compose.yml` under `VNC_PASS`, or check container logs if not defined.
+- Password: Defined in `.devcontainer/compose.yml` under `VNC_PASS`, or check the container logs if undefined.
+
+---
+
+## 🚀 Deployment with Kamal
+
+This app is ready for **simple, single-machine deployment with [Kamal](https://github.com/basecamp/kamal)**.
+
+You'll need [`sops`](https://github.com/getsops/sops) to manage encrypted secrets.
+
+### 🔐 Add production secrets:
+
+```bash
+sops edit .kamal/production.secrets.yml
+```
+
+Example content:
+
+```yaml
+mysql_root_password: ...
+mysql_password: ...
+registry_password: ...
+minio_root_password: ...
+master_key: ...
+```
+
+### 🌍 Configure your environment:
+
+Set the following variables in your environment or `.env` file:
+
+```bash
+SERVER_IP=<your-server-ip>
+USER_ID=<kamal-uid>
+GROUP_ID=<kamal-gid>
+```
+
+### 🚢 Deploy:
+
+```bash
+kamal server bootstrap -v \
+  && kamal accessory boot all \
+  && kamal deploy -v
+```
+
+> For more context, tips, and caveats, check out this deep dive:  
+> [Kamal Deployment Chronicles – The Quest for Production-like Nirvana](https://medium.com/code-and-coffee/kamal-deployment-chronicles-the-quest-for-production-like-nirvana-82c9ce727045)
 
 ---
 
 ## ✅ Summary
 
-This app shows how to use the **BiDi protocol of ChromeDriver** via `bidi2pdf-rails` to generate PDFs from Rails views —
-a clean, native browser rendering approach that sidesteps complex setups and external services.
+This demo app illustrates a modern way to generate PDFs directly from Rails views using the **native BiDi protocol of
+ChromeDriver**, offering:
 
----
+- **True-to-browser output**
+- **Zero Node.js dependencies**
+- **Full Rails integration**
+- **GitHub Codespaces + Kamal support out of the box**
+
+Build PDFs the Rails way — clean, fast, and future-ready.
