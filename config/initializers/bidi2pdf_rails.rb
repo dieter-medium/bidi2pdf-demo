@@ -20,7 +20,7 @@ Bidi2pdfRails.configure do |config|
   chrome_session_args = Bidi2pdf::Bidi::Session::DEFAULT_CHROME_ARGS.dup
 
   chrome_session_args << "--auto-open-devtools-for-tabs" if Rails.env.development?
-  chrome_session_args << "--no-sandbox" if ENV["CODESPACES"] && ENV["CODESPACES"] == "true"
+  chrome_session_args << "--no-sandbox" if (ENV["CODESPACES"] && ENV["CODESPACES"] == "true") || ENV["DISABLE_CHROME_SANDBOX"]
 
   config.general_options.chrome_session_args = chrome_session_args
 
