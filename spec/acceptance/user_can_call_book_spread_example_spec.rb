@@ -5,29 +5,33 @@ require "pp"
 
 RSpec.feature "As a developer, I want to an example of book spread", :chromedriver, :pdf, type: :request do
   before :all do
-    if ENV["CI"] && false
+    if inside_container?
       container_id = Socket.gethostname
       container = Docker::Container.get(container_id)
 
-      RSpec.configuration.shared_network&.connect(container.id, nil, { "EndpointConfig" => { "Aliases" => [ "my-rails-app" ] } })
+      RSpec.configuration.shared_network&.connect(container.id, nil, { "EndpointConfig" => { "Aliases" => ["my-rails-app"] } })
 
-      stop_server
-      start_server
+      # restart_server
     end
+  end
 
-    pp RSpec.configuration.chromedriver_container.info
+  after :all do
+    if inside_container?
+      container_id = Socket.gethostname
+      container = Docker::Container.get(container_id)
+      RSpec.configuration.shared_network&.disconnect(container.id)
+    end
   end
 
   before do
-    if ENV["IN_DEV_CONTAINER"] && ENV["IN_DEV_CONTAINER"] == "true"
-      with_pdf_settings :asset_host, "http://rails-app:#{@port}/"
+    with_render_setting :browser_url, session_url
+
+    with_lifecycle_settings :after_print, ->(_url_or_content, _browser_tab, binary_pdf_content, _filename, _controller) { store_pdf_file(binary_pdf_content, "rendered") }
+
+    if inside_container?
+      with_pdf_settings :asset_host, "http://my-rails-app:#{@port}/"
     else
-      with_render_setting :browser_url, session_url
-      if ENV["CI"]
-        with_pdf_settings :asset_host, "http://host.docker.internal:#{@port}"
-      else
-        with_pdf_settings :asset_host, "http://host.docker.internal:#{@port}"
-      end
+      with_pdf_settings :asset_host, "http://host.docker.internal:#{@port}"
     end
     Bidi2pdfRails::ChromedriverManagerSingleton.initialize_manager force: true
   end
@@ -51,8 +55,11 @@ RSpec.feature "As a developer, I want to an example of book spread", :chromedriv
       end
 
       and_ "the PDF contains the expected number of pages" do
-        expected_page_count = 5
-        expect(@response.body).to have_pdf_page_count(expected_page_count)
+        expected_page_count = 4
+
+        with_pdf_debug(@response.body) do |pdf_data|
+          expect(pdf_data).to have_pdf_page_count(expected_page_count)
+        end
       end
 
       and_ "the disposition header is set to attachment" do

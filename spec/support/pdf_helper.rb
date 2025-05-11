@@ -8,10 +8,14 @@ module PdfHelper
 
   def rails_host
     if ENV["CI"]
-      Socket.gethostname
+      "localhost" # Socket.ip_address_list.detect(&:ipv4_private?).ip_address
     else
       "localhost"
     end
+  end
+
+  def inside_container?
+    File.exist?("/.dockerenv")
   end
 
   def follow_redirects(response, max_redirects = 10)
@@ -22,6 +26,22 @@ module PdfHelper
       redirect_count += 1
     end
     response
+  end
+
+  def with_pdf_debug(pdf_data)
+    yield pdf_data
+  rescue RSpec::Expectations::ExpectationNotMetError => e
+    failure_output = store_pdf_file pdf_data, "test-failure"
+    puts "Test failed! PDF saved to: #{failure_output}"
+    raise e
+  end
+
+  def store_pdf_file(pdf_data, filename_prefix = "test")
+    pdf_file = tmp_file("pdf-files", "#{filename_prefix}-#{Time.now.to_i}.pdf")
+    FileUtils.mkdir_p(File.dirname(pdf_file))
+    File.binwrite(pdf_file, pdf_data)
+
+    pdf_file
   end
 end
 

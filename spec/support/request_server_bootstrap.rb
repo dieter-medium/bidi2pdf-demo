@@ -39,6 +39,11 @@ module RequestServerBootstrap
   def stop_server
     @server_thread&.exit
   end
+
+  def restart_server
+    stop_server
+    start_server
+  end
 end
 
 RSpec.configure do |config|
