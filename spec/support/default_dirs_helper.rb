@@ -15,7 +15,7 @@ module DefaultDirsHelper
   end
 
   def random_tmp_dir(*dirs, prefix: "tmp_")
-    all_dirs = [ tmp_dir ] + (dirs || []).compact
+    all_dirs = [tmp_dir] + (dirs || []).compact
 
     File.join(*all_dirs, "#{prefix}#{SecureRandom.hex(8)}")
   end

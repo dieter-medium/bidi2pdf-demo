@@ -6,3 +6,100 @@ inherit_gem: { rubocop-rails-omakase: rubocop.yml }
 # # Use `[a, [b, c]]` not `[ a, [ b, c ] ]`
 # Layout/SpaceInsideArrayLiteralBrackets:
 #   Enabled: false
+# Omakase Ruby styling for Rails
+
+AllCops:
+  NewCops: enable
+  TargetRubyVersion: 3.3
+
+Style/StringLiterals:
+  EnforcedStyle: double_quotes
+
+Style/StringLiteralsInInterpolation:
+  EnforcedStyle: double_quotes
+
+Style/Documentation:
+  Enabled: false
+
+RSpec/SubjectStub:
+  Enabled: false
+
+RSpec/ExampleLength:
+  Enabled: false
+
+Layout/MultilineMethodCallIndentation:
+  Enabled: false
+
+Layout/FirstArgumentIndentation:
+  Enabled: false
+
+Layout/ClosingParenthesisIndentation:
+  Enabled: false
+
+Layout/FirstHashElementIndentation:
+  EnforcedStyle: consistent
+
+Layout/FirstArrayElementIndentation:
+  Enabled: false
+
+Layout/MultilineOperationIndentation:
+  Enabled: false
+
+Layout/BeginEndAlignment:
+  Enabled: false
+
+Layout/ArrayAlignment:
+  Enabled: false
+
+Layout/ElseAlignment:
+  Enabled: false
+
+Layout/EndAlignment:
+  Enabled: false
+
+Layout/LineLength:
+  Enabled: false
+
+Layout/SpaceInsideArrayLiteralBrackets:
+  EnforcedStyle: no_space
+
+RSpec/MultipleMemoizedHelpers:
+  Max: 10
+
+Metrics/MethodLength:
+  Enabled: false
+
+Metrics/ClassLength:
+  Enabled: false
+
+Metrics/ParameterLists:
+  Max: 10
+
+
+Gemspec/DevelopmentDependencies:
+  EnforcedStyle: gemspec
+
+RSpec/InstanceVariable:
+  Enabled: false
+
+RSpec/BeforeAfterAll:
+  Enabled: false
+
+RSpec/SpecFilePathFormat:
+  Enabled: true
+  Exclude:
+    - 'spec/acceptance/**/*_spec.rb'
+
+RSpec/DescribeClass:
+  Enabled: true
+  Exclude:
+    - 'spec/acceptance/**/*_spec.rb'
+
+RSpec/MultipleExpectations:
+  Enabled: true
+  Exclude:
+    - 'spec/acceptance/**/*_spec.rb'
+
+plugins:
+  - rubocop-rake
+  - rubocop-rspec
