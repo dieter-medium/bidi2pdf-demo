@@ -12,7 +12,18 @@ Bidi2pdfRails.configure do |config|
   # config.general_options.headless = !Rails.env.development? # Run Chrome in headless mode
   # config.general_options.wait_for_network_idle = true # Wait for network idle
   config.general_options.wait_for_page_loaded = true # Wait for page loaded
-  # config.general_options.wait_for_page_check_script = nil # Wait for page check script
+  # config.general_options.wait_for_page_check_script = <<~JS
+  #  Promise.race([
+  #     new Promise(resolve => {
+  #       const check = () => {
+  #         if (window.loaded) resolve('done');
+  #         else setTimeout(check, 100);
+  #       };
+  #       check();
+  #     }),
+  #     new Promise(resolve => setTimeout(() => resolve('done'), 5000))
+  #   ]);
+  # JS
   # config.general_options.notification_service = -> { ActiveSupport::Notifications } # Notification service
   config.general_options.default_timeout = 30 # Default timeout for various Bidi commands
   # config.general_options.chrome_session_args = ["--disable-gpu", "--disable-popup-blocking", "--disable-hang-monitor"] # Chrome session arguments
@@ -20,7 +31,7 @@ Bidi2pdfRails.configure do |config|
   chrome_session_args = Bidi2pdf::Bidi::Session::DEFAULT_CHROME_ARGS.dup
 
   chrome_session_args << "--auto-open-devtools-for-tabs" if Rails.env.development?
-  chrome_session_args << "--no-sandbox" if ENV["CODESPACES"] && ENV["CODESPACES"] == "true"
+  chrome_session_args << "--no-sandbox" if (ENV["CODESPACES"] && ENV["CODESPACES"] == "true") || ENV["DISABLE_CHROME_SANDBOX"]
 
   config.general_options.chrome_session_args = chrome_session_args
 

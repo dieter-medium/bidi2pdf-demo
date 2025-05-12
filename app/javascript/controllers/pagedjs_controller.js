@@ -22,6 +22,8 @@ export default class extends Controller {
 
         previewer.registerHandlers(PagedJsReadyHandler);
 
+        console.debug("Added Paged.js ready handler");
+
         previewer.preview(
             content,
             this.stylesheetsValue,
@@ -31,6 +33,8 @@ export default class extends Controller {
     }
 
     notifyPageCount(pageCount) {
+        console.debug("Paged.js page count", pageCount);
+
         this.dispatch("page-count", {
             detail: {
                 pageCount: pageCount
@@ -39,6 +43,8 @@ export default class extends Controller {
     }
 
     notifyPagesReady(pages) {
+        console.debug("Paged.js pages ready");
+        
         this.dispatch("pages-ready", {
             detail: {
                 pages: pages
