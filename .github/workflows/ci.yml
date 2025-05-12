@@ -53,3 +53,43 @@ jobs:
       - name: Lint code for consistent style
         run: bin/rubocop -f github
 
+  rspec-tests:
+    permissions:
+      contents: read
+      pull-requests: write
+    runs-on: ubuntu-latest
+    env:
+      SHOW_CONTAINER_LOGS: true
+      DISABLE_CHROME_SANDBOX: true
+      RAILS_ENV: test
+    steps:
+      - uses: actions/checkout@v3
+      - name: Set up Ruby
+        uses: ruby/setup-ruby@v1
+        with:
+          ruby-version: .ruby-version
+          bundler-cache: true
+      - name: Prepare DB
+        run: |
+          bin/rails db:test:prepare
+      - name: Pull Chromedriver Docker image
+        run: |
+          docker pull dieters877565/chromedriver
+      - name: Run Tests
+        run: |
+          bundle exec rake spec
+      - name: Upload generated pdf files (if any)
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: pdf-files
+          path: tmp/pdf-files/
+      - name: Upload logs
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: logs
+          include-hidden-files: true
+          path: log/
+
+
