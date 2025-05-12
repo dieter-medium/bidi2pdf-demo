@@ -356,6 +356,12 @@ GEM
       rubocop (>= 1.72)
       rubocop-performance (>= 1.24)
       rubocop-rails (>= 2.30)
+    rubocop-rake (0.7.1)
+      lint_roller (~> 1.1)
+      rubocop (>= 1.72.1)
+    rubocop-rspec (3.6.0)
+      lint_roller (~> 1.1)
+      rubocop (~> 1.72, >= 1.72.1)
     ruby-progressbar (1.13.0)
     ruby-rc4 (0.1.5)
     rubyzip (2.4.1)
@@ -469,6 +475,8 @@ DEPENDENCIES
   rspec (~> 3.13)
   rspec-rails (~> 8.0.0)
   rubocop-rails-omakase
+  rubocop-rake (~> 0.7.1)
+  rubocop-rspec (~> 3.6)
   solid_cable
   solid_cache
   solid_queue
