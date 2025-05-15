@@ -29,9 +29,9 @@ RSpec.feature "As a developer, I want to an example of book spread", :chromedriv
     with_lifecycle_settings :after_print, ->(_url_or_content, _browser_tab, binary_pdf_content, _filename, _controller) { store_pdf_file(binary_pdf_content, "rendered") }
 
     if inside_container?
-      with_pdf_settings :asset_host, "http://my-rails-app:#{@port}/"
+      with_pdf_settings :asset_host, "http://my-rails-app:#{server_port}/"
     else
-      with_pdf_settings :asset_host, "http://host.docker.internal:#{@port}"
+      with_pdf_settings :asset_host, "http://host.docker.internal:#{server_port}"
     end
     Bidi2pdfRails::ChromedriverManagerSingleton.initialize_manager force: true
   end
@@ -43,7 +43,7 @@ RSpec.feature "As a developer, I want to an example of book spread", :chromedriv
   scenario "Rendering a PDF using the book spread example" do
     when_ "I visit the PDF version of a report" do
       before do
-        @response = get_pdf_response "/example_book_spread/show.pdf"
+        @response = get_pdf_response "example_book_spread/show.pdf"
       end
 
       then_ "I receive a successful HTTP response" do

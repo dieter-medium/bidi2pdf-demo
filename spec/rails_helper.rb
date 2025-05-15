@@ -10,6 +10,8 @@ abort("The Rails environment is running in production mode!") if Rails.env.produ
 require 'rspec/rails'
 # Add additional requires below this line. Rails is not loaded until this point!
 
+require "bidi2pdf_rails/test_helpers"
+
 # Requires supporting ruby files with custom matchers and macros, etc, in
 # spec/support/ and its subdirectories. Files matching `spec/**/*_spec.rb` are
 # run as spec files by default. This means that files in spec/support that end
@@ -76,4 +78,8 @@ RSpec.configure do |config|
   config.alias_example_group_to :scenario, feature: true
   config.alias_example_to :then_, feature: true
   config.alias_example_to :and_, feature: true
+
+  Bidi2pdfRails::TestHelpers.configure do |config|
+    config.server_host = "0.0.0.0"
+  end
 end

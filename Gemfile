@@ -68,7 +68,8 @@ group :development do
 end
 
 gem "bidi2pdf"
-gem "bidi2pdf-rails"
+# gem "bidi2pdf-rails"
+gem "bidi2pdf-rails", github: "dieter-medium/bidi2pdf-rails", branch: "main"
 gem "websocket-native"
 
 gem "rack-cors", "~> 2.0"

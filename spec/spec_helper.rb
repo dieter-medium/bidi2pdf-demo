@@ -102,9 +102,4 @@ RSpec.configure do |config|
   config.define_derived_metadata(file_path: %r{/spec/acceptance/}) do |metadata|
     metadata[:acceptance] = true
   end
-
-  config.add_setting :spec_dir, default: File.expand_path(__dir__)
 end
-
-require_relative "support/default_dirs_helper"
-require "bidi2pdf/test_helpers"

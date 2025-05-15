@@ -1,3 +1,12 @@
+GIT
+  remote: https://github.com/dieter-medium/bidi2pdf-rails.git
+  revision: 257146e3d04ce1baf5bbc7974f48e27a7b25efbc
+  branch: main
+  specs:
+    bidi2pdf-rails (0.1.3)
+      bidi2pdf (>= 0.1.9)
+      rails (>= 7.2.2.1, < 8.0.3.0)
+
 GEM
   remote: https://rubygems.org/
   specs:
@@ -106,9 +115,6 @@ GEM
       sys-proctable (~> 1.3)
       thor (~> 1.3)
       websocket-client-simple (~> 0.9.0)
-    bidi2pdf-rails (0.1.3)
-      bidi2pdf (>= 0.1.9)
-      rails (>= 7.2.2.1, < 8.0.3.0)
     bigdecimal (3.1.9)
     bindex (0.8.1)
     bootsnap (1.18.5)
@@ -457,7 +463,7 @@ DEPENDENCIES
   aws-sdk-s3 (~> 1.186)
   bcrypt
   bidi2pdf
-  bidi2pdf-rails
+  bidi2pdf-rails!
   bootsnap
   brakeman
   debug
