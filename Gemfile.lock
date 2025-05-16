@@ -117,7 +117,7 @@ GEM
       websocket-client-simple (~> 0.9.0)
     bigdecimal (3.1.9)
     bindex (0.8.1)
-    bootsnap (1.18.5)
+    bootsnap (1.18.6)
       msgpack (~> 1.2)
     brakeman (7.0.2)
       racc
@@ -174,7 +174,7 @@ GEM
       activesupport (>= 5.0.0)
     jmespath (1.6.2)
     json (2.11.3)
-    kamal (2.6.0)
+    kamal (2.6.1)
       activesupport (>= 7.0)
       base64 (~> 0.2)
       bcrypt_pbkdf (~> 1.0)
