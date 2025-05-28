@@ -78,6 +78,6 @@ gem "rqrcode", "~> 3.1"
 
 gem "redis", "~> 5.4"
 
-gem "aws-sdk-s3", "~> 1.186"
+gem "aws-sdk-s3", "~> 1.187"
 
 gem "bcrypt"
