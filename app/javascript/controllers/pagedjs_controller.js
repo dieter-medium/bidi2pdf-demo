@@ -32,6 +32,14 @@ export default class extends Controller {
 
     }
 
+    notifyBeforeParsed(content) {
+        this.dispatch("before-parsed", {
+            detail: {
+                content: content
+            }
+        });
+    }
+
     notifyPageCount(pageCount) {
         console.debug("Paged.js page count", pageCount);
 
@@ -44,7 +52,7 @@ export default class extends Controller {
 
     notifyPagesReady(pages) {
         console.debug("Paged.js pages ready");
-        
+
         this.dispatch("pages-ready", {
             detail: {
                 pages: pages

@@ -1,0 +1,139 @@
+<% content_for :title, "Accessibility example" %>
+<% content_for :head do %>
+  <%= stylesheet_link_tag "example_accessibility/interface", "data-turbo-track": "reload" %>
+<% end %>
+
+<div
+  data-controller="pagedjs"
+  data-pagedjs-stylesheets-value="<%= ["fonts/Roboto/roboto", "example_accessibility/print"].map { |stylesheet| asset_url(stylesheet, type: :stylesheet) }.to_json %>"
+  data-pagedjs-clear-content-value="false"
+  role="presentation"
+>
+  <div data-pagedjs-target="rendered"></div>
+
+  <template data-pagedjs-target="content">
+    <header role="banner">
+      <h1>Accessible Web Content Overview</h1>
+      <p>This document explores key principles and practices for building accessible digital experiences, suitable for
+        printing and PDF rendering using Paged.js.</p>
+    </header>
+
+    <header role="banner" class="running-header">
+      <h1>Accessible Web Content Overview</h1>
+    </header>
+
+
+    <div class="running-footer" role="contentinfo">
+      <p><small>&copy; 2025 Dieter S.</small></p>
+    </div>
+
+    <main role="main">
+      <section aria-labelledby="section-list">
+        <h2 id="section-list">1. Benefits of Accessibility</h2>
+
+        <h3>Top reasons to embrace accessibility:</h3>
+        <div role="list" class="custom-list">
+          <div role="listitem" class="item">
+            <div role="LBody">
+              <span role="presentation">● </span>
+              Improves user experience for everyone
+            </div>
+          </div>
+          <div role="listitem" class="item">
+            <div role="LBody">
+              <span role="presentation">● </span>
+              Expands audience reach
+            </div>
+          </div>
+          <div role="listitem" class="item">
+            <div role="LBody">
+              <span role="presentation">● </span>
+              Reduces legal risk
+            </div>
+          </div>
+          <div role="listitem" class="item">
+            <div role="LBody">
+              <span role="presentation">● </span>
+              Boosts SEO and usability
+            </div>
+          </div>
+        </div>
+
+        <h3>Steps to get started:</h3>
+        <div role="list" class="custom-list">
+          <div role="listitem" class="item">
+            <span role="presentation">1. </span>
+            Use semantic HTML
+
+          </div>
+          <div role="listitem" class="item">
+            <span role="presentation">2. </span>
+            Add alternative text for images
+          </div>
+          <div role="listitem" class="item">
+
+            <span role="presentation">3. </span>
+            Ensure keyboard navigation
+          </div>
+          <div role="listitem" class="item">
+            <span role="presentation">4. </span>
+            Use proper color contrast
+          </div>
+        </div>
+      </section>
+
+      <section class="page-break" aria-labelledby="section-table">
+        <h2 id="section-table">2. Accessibility Feature Checklist</h2>
+
+        <table role="table">
+          <tr>
+            <th role="columnheader" scope="col"><p>Feature</p></th>
+            <th role="columnheader" scope="col"><p>Status</p></th>
+            <th role="columnheader" scope="col"><p>Details</p></th>
+          </tr>
+          <tr>
+            <td role="cell"><p>Alt text on images</p></td>
+            <td role="cell"><p>✓ Implemented</p></td>
+            <td role="cell"><p>All images have descriptive alt attributes</p></td>
+          </tr>
+          <tr>
+            <td role="cell"><p>Keyboard navigation</p></td>
+            <td role="cell"><p>✓ Implemented</p></td>
+            <td role="cell"><p>All interactive elements are keyboard accessible</p></td>
+          </tr>
+          <tr>
+            <td role="cell"><p>Color contrast</p></td>
+            <td role="cell"><p>✗ Pending</p></td>
+            <td role="cell"><p>Needs WCAG contrast checking</p></td>
+          </tr>
+        </table>
+
+      </section>
+
+      <section class="page-break" aria-labelledby="section-image">
+        <h2 id="section-image">3. Accessibility in Action</h2>
+
+        <figure role="figure" aria-labelledby="caption">
+
+          <%= image_tag 'example_book_spread/mon-image.jpg',
+                        class: "mon-image",
+                        alt: "People with different abilities interacting with technology.",
+                        width: "600",
+                        height: "400" %>
+
+          <figcaption id="caption" role="doc-caption">Diverse individuals accessing digital content in inclusive ways.
+          </figcaption>
+
+        </figure>
+
+      </section>
+
+      <section class="page-break" aria-labelledby="section-final">
+        <h2 id="section-final">4. Final Words</h2>
+        <p>By embedding accessibility into our workflow, we foster inclusive design, empower all users, and contribute
+          to a better web for everyone.</p>
+      </section>
+    </main>
+  </template>
+
+</div>

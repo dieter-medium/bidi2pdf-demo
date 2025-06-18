@@ -1,6 +1,6 @@
 # 🚀 Rails 8 Demo App – GitHub Codespaces Ready
 
-This repository demonstrates how to generate high-fidelity PDFs from Rails views using  
+This repository demonstrates how to generate high‑fidelity PDFs from Rails views using  
 **[`bidi2pdf-rails`](https://rubygems.org/gems/bidi2pdf-rails)** — a modern, native alternative to Grover or WickedPDF.
 
 ---
@@ -12,16 +12,16 @@ This repository demonstrates how to generate high-fidelity PDFs from Rails views
 - **Propshaft** – A lightweight, modern asset pipeline
 - **Importmaps** – JavaScript without bundlers or Node
 - **Stimulus** – A minimal JavaScript framework for progressive enhancements
-- **Page.js** – Fast, client-side navigation with zero SPA overhead
+- **Page.js** – Fast, client‑side navigation with zero SPA overhead
 
-> **Goal:** Showcase how to leverage `bidi2pdf-rails` for clean, browser-accurate PDF rendering inside Rails, using
+> **Goal:** Showcase how to leverage `bidi2pdf-rails` for clean, browser‑accurate PDF rendering inside Rails, using
 > Chrome’s native BiDi protocol—no Puppeteer, no wkhtmltopdf, no hassle.
 
 ---
 
 ## ☁️ Instant Setup with GitHub Codespaces
 
-This app is **fully preconfigured for GitHub Codespaces**, making onboarding as smooth as possible.
+This app is **fully pre‑configured for GitHub Codespaces**, making onboarding as smooth as possible.
 
 ### 🏁 Getting Started:
 
@@ -35,6 +35,60 @@ This app is **fully preconfigured for GitHub Codespaces**, making onboarding as 
 ```
 
 > Access the app via the forwarded port shown in the Codespace interface.
+
+---
+
+### ⚠️ Bundler Caveat: Accessibility Dependencies
+
+Running `bundle install` will attempt to compile two optional gems:
+
+- **`xmp_toolkit_ruby`**
+- **`qpdf_ruby`**
+
+Both gems contain native C extensions that depend on the system libraries **`xmp‑toolkit`** and **`qpdf`**. If those
+libraries are not available for your operating system (or you do not have the required build tools installed), the
+compilation step will fail.
+
+**You have two options:**
+
+1. **Install the libraries manually** and re‑run `bundle install`.
+
+- macOS: `brew install qpdf`
+- Debian/Ubuntu: `apt‑get install libqpdf‑dev` (or the equivalent packages for your distro)
+
+⚠️For XMP Toolkit, see   <https://github.com/dieter-medium/xmp_toolkit_ruby>
+or <https://github.com/adobe/XMP-Toolkit-SDK>
+
+2. **Skip the accessibility post‑processing** by disabling it:
+
+   ```bash
+   # Skip native extensions for accessibility
+   DISABLE_ACCESSIBILITY=1 bundle install
+
+   # Start Rails with accessibility features disabled
+   DISABLE_ACCESSIBILITY=1 bin/rails s
+   ```
+
+When `DISABLE_ACCESSIBILITY=1` is set, the app works fine, **but the accessibility examples (tagged PDFs, embedded XMP
+metadata, etc.) are omitted**, because they rely on the native post‑processing performed by the two gems above.
+
+#### More installation docs
+
+For additional build instructions, troubleshooting tips, and platform‑specific notes, consult the gem repositories:
+
+- <https://github.com/dieter-medium/xmp_toolkit_ruby>
+- <https://github.com/dieter-medium/qpdf_ruby>
+
+---
+
+## Decvontainers with rubymine
+
+RubyMine now installs mise at launch. So you need to run the following command to install mise:
+
+```bash
+mise settings add idiomatic_version_file_enable_tools ruby
+mise use -g ruby@3.4.3
+```
 
 ---
 
@@ -79,7 +133,7 @@ gh codespace ports forward 5900:6000
 
 ## 🚀 Deployment with Kamal
 
-This app is ready for **simple, single-machine deployment with [Kamal](https://github.com/basecamp/kamal)**.
+This app is ready for **simple, single‑machine deployment with [Kamal](https://github.com/basecamp/kamal)**.
 
 You'll need [`sops`](https://github.com/getsops/sops) to manage encrypted secrets.
 
@@ -118,7 +172,7 @@ kamal server bootstrap -v \
 ```
 
 > For more context, tips, and caveats, check out this deep dive:  
-> [Kamal Deployment Chronicles – The Quest for Production-like Nirvana](https://medium.com/code-and-coffee/kamal-deployment-chronicles-the-quest-for-production-like-nirvana-82c9ce727045)
+> [Kamal Deployment Chronicles – The Quest for Production‑like Nirvana](https://medium.com/code-and-coffee/kamal-deployment-chronicles-the-quest-for-production-like-nirvana-82c9ce727045)
 
 ---
 
@@ -127,9 +181,14 @@ kamal server bootstrap -v \
 This demo app illustrates a modern way to generate PDFs directly from Rails views using the **native BiDi protocol of
 ChromeDriver**, offering:
 
-- **True-to-browser output**
+- **True‑to‑browser output**
 - **Zero Node.js dependencies**
 - **Full Rails integration**
 - **GitHub Codespaces + Kamal support out of the box**
 
-Build PDFs the Rails way — clean, fast, and future-ready.
+Build PDFs the Rails way — clean, fast, and future‑ready.
+
+
+---
+
+

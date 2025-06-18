@@ -5,19 +5,17 @@ on:
   push:
     branches: [ main ]
 
+env:
+  ENABLE_ACCESSIBILITY: 1
+
 jobs:
   scan_ruby:
     runs-on: ubuntu-latest
 
     steps:
-      - name: Checkout code
-        uses: actions/checkout@v4
-
-      - name: Set up Ruby
-        uses: ruby/setup-ruby@v1
-        with:
-          ruby-version: .ruby-version
-          bundler-cache: true
+      - uses: actions/checkout@v3
+      - name: Setup Ruby Environment
+        uses: ./.github/actions/setup-ruby
 
       - name: Scan for common Rails security vulnerabilities using static analysis
         run: bin/brakeman --no-pager
@@ -26,14 +24,9 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
-      - name: Checkout code
-        uses: actions/checkout@v4
-
-      - name: Set up Ruby
-        uses: ruby/setup-ruby@v1
-        with:
-          ruby-version: .ruby-version
-          bundler-cache: true
+      - uses: actions/checkout@v3
+      - name: Setup Ruby Environment
+        uses: ./.github/actions/setup-ruby
 
       - name: Scan for security vulnerabilities in JavaScript dependencies
         run: bin/importmap audit
@@ -41,14 +34,9 @@ jobs:
   lint:
     runs-on: ubuntu-latest
     steps:
-      - name: Checkout code
-        uses: actions/checkout@v4
-
-      - name: Set up Ruby
-        uses: ruby/setup-ruby@v1
-        with:
-          ruby-version: .ruby-version
-          bundler-cache: true
+      - uses: actions/checkout@v3
+      - name: Setup Ruby Environment
+        uses: ./.github/actions/setup-ruby
 
       - name: Lint code for consistent style
         run: bin/rubocop -f github
@@ -63,12 +51,9 @@ jobs:
       DISABLE_CHROME_SANDBOX: true
       RAILS_ENV: test
     steps:
-      - uses: actions/checkout@v4
-      - name: Set up Ruby
-        uses: ruby/setup-ruby@v1
-        with:
-          ruby-version: .ruby-version
-          bundler-cache: true
+      - uses: actions/checkout@v3
+      - name: Setup Ruby Environment
+        uses: ./.github/actions/setup-ruby
       - name: Prepare DB
         run: |
           bin/rails db:test:prepare

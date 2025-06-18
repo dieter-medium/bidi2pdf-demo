@@ -11,11 +11,12 @@
   ],
   // Features to add to the dev container. More info: https://containers.dev/features.
   "features": {
+    "./features/qpdf": {},
     "ghcr.io/devcontainers/features/github-cli:1": {},
     "ghcr.io/rails/devcontainer/features/activestorage": {},
     "ghcr.io/devcontainers/features/docker-outside-of-docker:1": {},
     "ghcr.io/rails/devcontainer/features/sqlite3": {},
-    "ghcr.io/rails/devcontainer/features/mysql-client": {}
+    "ghcr.io/rails/devcontainer/features/mysql-client": {},
   },
   "mounts": [
     {
@@ -26,7 +27,10 @@
   ],
   "containerEnv": {
     "KAMAL_REGISTRY_PASSWORD": "$KAMAL_REGISTRY_PASSWORD",
-    "IN_DEV_CONTAINER": "true"
+    "IN_DEV_CONTAINER": "true",
+    // at the moment we get and error Cannot open library: libMiniPDFL.so: cannot enable executable stack as shared object requires: Invalid argument
+    // without GLIBC_TUNABLES="glibc.rtld.execstack=2", means the MiniPDFL library requires an executable stack, which is not allowed by default in modern Linux distributions.
+    "GLIBC_TUNABLES": "glibc.rtld.execstack=2",
   },
   // Use 'forwardPorts' to make a list of ports inside the container available locally.
   "forwardPorts": [

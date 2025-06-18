@@ -1,0 +1,14 @@
+name: Setup Ruby
+description: Checks out code, sets up Ruby, and installs dependencies
+
+runs:
+  using: "composite"
+  steps:
+    - uses: awalsh128/cache-apt-pkgs-action@latest
+      with:
+        packages: qpdf libqpdf-dev libvips
+        version: 1.0
+    - uses: ruby/setup-ruby@v1
+      with:
+        ruby-version: .ruby-version
+        bundler-cache: true
