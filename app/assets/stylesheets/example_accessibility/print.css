@@ -1,0 +1,116 @@
+@page {
+    size: 210mm 297mm;
+    margin: 30mm 2mm 10mm 2mm;
+
+    @top-left {
+        content: element(runningheader);
+        height: 100%;
+        width: 100%;
+    }
+
+    @bottom-left {
+        content: element(runningfooter);
+        height: 100%;
+        width: 100%;
+    }
+}
+
+.running-header {
+    position: running(runningheader);
+    padding: 2.5mm 0 2.5mm 5mm;
+    white-space: nowrap;
+    align-items: center;
+}
+
+.running-footer {
+    position: running(runningfooter);
+}
+
+html {
+    font-family: "Roboto", sans-serif;
+    font-size: 12pt;
+}
+
+body {
+    line-height: 1.6;
+    color: #333;
+}
+
+h1, h2, h3 {
+    color: #111;
+    page-break-after: avoid;
+}
+
+p {
+    margin: 0 0 1rem;
+}
+
+ul, ol {
+    margin: 1rem 0 1rem 2rem;
+}
+
+table {
+    width: 100%;
+    border-collapse: collapse;
+    margin: 2rem 0;
+    page-break-inside: avoid;
+}
+
+th, td {
+    padding: 0.5rem;
+    text-align: left;
+}
+
+th {
+
+}
+
+img {
+    max-width: 100%;
+    height: auto;
+}
+
+figure {
+    margin: 2rem 0;
+    text-align: center;
+    page-break-inside: avoid;
+    display: inline-block;
+}
+
+.image-container {
+    page-break-inside: avoid;
+    break-inside: avoid;
+    display: block;
+    position: relative;
+}
+
+figcaption {
+    font-size: 0.9em;
+    color: #555;
+}
+
+.page-break {
+    break-before: page;
+}
+
+.custom-list {
+    margin: 1rem 0 1rem 2rem;
+    padding: 0;
+    list-style: none;
+}
+
+.custom-list .item {
+    margin-left: 1.2em;
+    text-indent: -1.2em;
+}
+
+.custom-list li {
+    position: relative;
+    padding-left: 2.5rem; /* space for the custom sign */
+}
+
+.custom-num {
+    position: absolute;
+    left: 0;
+    font-weight: 600; /* style the number however you like */
+}

@@ -68,8 +68,7 @@ group :development do
 end
 
 gem "bidi2pdf"
-# gem "bidi2pdf-rails"
-gem "bidi2pdf-rails", github: "dieter-medium/bidi2pdf-rails", branch: "main"
+gem "bidi2pdf-rails"
 gem "websocket-native"
 
 gem "rack-cors", "~> 3.0"
@@ -81,3 +80,8 @@ gem "redis", "~> 5.4"
 gem "aws-sdk-s3", "~> 1.186"
 
 gem "bcrypt"
+
+unless ENV["DISABLE_ACCESSIBILITY"] == "1"
+  gem "xmp_toolkit_ruby", "~> 0.1.0"
+  gem "qpdf_ruby"
+end

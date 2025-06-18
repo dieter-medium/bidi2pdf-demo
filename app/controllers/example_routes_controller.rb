@@ -49,6 +49,14 @@ class ExampleRoutesController < ApplicationController
         action: "generate",
         description: "This page demonstrates how to generate a PDF asynchronously using ActiveJob and ActionCable.",
         url: example_async_pdf_generate_url
+      },
+      {
+        title: "Accessibility Example",
+        controller: "ExampleAccessibilityController",
+        action: "show",
+        description: "This page demonstrates how to generate a PDF with accessibility features using Paged.js and post-processing with xmp_toolkit_ruby and qpdf_ruby. The quirky html is needed to get a good tagged PDF.",
+        url: example_accessibility_url,
+        pdf_url: example_accessibility_url(format: :pdf)
       }
     ]
   end

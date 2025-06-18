@@ -16,6 +16,10 @@ export default function createPagedJsReadyHandler(controller) {
             this.controller.notifyPageCount(nbr);
         }
 
+        beforeParsed(content) {
+            this.controller.notifyBeforeParsed(content);
+        }
+
 
         afterRendered(pages) {
             console.debug("Paged.js after rendered");

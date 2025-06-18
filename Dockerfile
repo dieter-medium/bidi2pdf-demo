@@ -14,6 +14,19 @@ FROM docker.io/library/ruby:$RUBY_VERSION-slim AS base
 # Rails app lives here
 WORKDIR /rails
 
+# use qpdf 12.x from Debian testing/unstable
+RUN set -eux; \
+    echo "deb http://deb.debian.org/debian testing main"   >  /etc/apt/sources.list.d/extra.list; \
+    echo "deb http://deb.debian.org/debian unstable main" >> /etc/apt/sources.list.d/extra.list; \
+    \
+    printf "Package: *\nPin: release a=testing\nPin-Priority: -1\n\n"   >  /etc/apt/preferences.d/99-pin-testing; \
+    printf "Package: *\nPin: release a=unstable\nPin-Priority: -1\n"  >> /etc/apt/preferences.d/99-pin-testing; \
+    apt-get update; \
+    apt-get -y --no-install-recommends install qpdf libqpdf-dev -t testing; \
+    apt-mark hold qpdf libqpdf-dev; \
+    \
+    apt-get clean; rm -rf /var/lib/apt/lists/*;
+
 # Install base packages
 RUN apt-get update -qq && \
     apt-get install --no-install-recommends -y curl default-mysql-client libjemalloc2 libvips sqlite3 && \
@@ -23,7 +36,11 @@ RUN apt-get update -qq && \
 ENV RAILS_ENV="production" \
     BUNDLE_DEPLOYMENT="1" \
     BUNDLE_PATH="/usr/local/bundle" \
-    BUNDLE_WITHOUT="development"
+    BUNDLE_WITHOUT="development" \
+    GLIBC_TUNABLES="glibc.rtld.execstack=2"
+
+    # at the moment we get and error Cannot open library: libMiniPDFL.so: cannot enable executable stack as shared object requires: Invalid argument
+    # without GLIBC_TUNABLES="glibc.rtld.execstack=2", means the MiniPDFL library requires an executable stack, which is not allowed by default in modern Linux distributions.
 
 # Throw-away build stage to reduce size of final image
 FROM base AS build
@@ -35,7 +52,9 @@ RUN apt-get update -qq && \
 
 # Install application gems
 COPY Gemfile Gemfile.lock ./
-RUN bundle install && \
+RUN qpdf --version
+RUN bundle config set --local build.qpdf_ruby -- --with-qpdf-include=/usr/local/include/qpdf --with-qpdf-lib=/usr/local/lib && \
+    bundle install && \
     rm -rf ~/.bundle/ "${BUNDLE_PATH}"/ruby/*/cache "${BUNDLE_PATH}"/ruby/*/bundler/gems/*/.git && \
     bundle exec bootsnap precompile --gemfile
 

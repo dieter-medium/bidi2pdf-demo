@@ -1,0 +1,11 @@
+{
+  "id": "pqd",
+  "version": "0.0.1",
+  "name": "QPDF",
+  "description": "Install QPDF, a command-line program that does structural, content-preserving transformations on PDF files.",
+  "install": {
+    "script": "install.sh"
+  },
+  "options": {
+  }
+}
