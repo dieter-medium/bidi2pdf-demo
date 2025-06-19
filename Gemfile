@@ -56,7 +56,7 @@ group :development, :test do
   gem "rubocop-rspec", "~> 3.6", require: false
 
   gem "rspec", "~> 3.13"
-  gem "rspec-rails", "~> 8.0.0"
+  gem "rspec-rails", "~> 8.0.1"
   gem "testcontainers", "~> 0.2"
   gem "pdf-reader", "~> 2.14"
   gem "unicode_utils", "~> 1.4"
