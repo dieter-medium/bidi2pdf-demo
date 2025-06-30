@@ -57,6 +57,14 @@ class ExampleRoutesController < ApplicationController
         description: "This page demonstrates how to generate a PDF with accessibility features using Paged.js and post-processing with xmp_toolkit_ruby and qpdf_ruby. The quirky html is needed to get a good tagged PDF.",
         url: example_accessibility_url,
         pdf_url: example_accessibility_url(format: :pdf)
+      },
+      {
+        title: "Encryption Example",
+        controller: "ExampleEncryptionController",
+        action: "show",
+        description: "This page demonstrates how to generate a password-protected PDF using qpdf_ruby for postprocessing. The user password is '12345678' and the owner password is 'password'.",
+        url: example_encryption_url,
+        pdf_url: example_encryption_url(format: :pdf)
       }
     ]
   end

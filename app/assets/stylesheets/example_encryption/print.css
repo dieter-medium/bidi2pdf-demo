@@ -1,0 +1,26 @@
+body {
+    font-family: "VG5000", sans-serif;
+    line-height: 1.5;
+    font-size: 16px;
+    letter-spacing: normal;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+}
+
+@page {
+    size: 210mm 297mm;
+    margin: 30mm 2mm 10mm 2mm;
+
+    @top-left {
+        content: element(runningheader);
+        height: 100%;
+        width: 100%;
+    }
+
+    @bottom-left {
+        content: element(runningfooter);
+        height: 100%;
+        width: 100%;
+    }
+}
+

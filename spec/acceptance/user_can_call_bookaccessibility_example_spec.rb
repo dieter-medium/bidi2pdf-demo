@@ -85,6 +85,12 @@ RSpec.feature "As a developer, I want to an example of accessible pdf's", :chrom
           expected_date_node.content = "DUMMY_DATE" if expected_date_node
         end
 
+        metadata_date_node = actual_xml.at_xpath("//pdf:Producer", "pdf" => XmpToolkitRuby::Namespaces::XMP_NS_PDF)
+        metadata_date_node.content = "DUMMY_PRODUCER" if metadata_date_node
+
+        expected_date_node = expected_xml.at_xpath("//pdf:Producer", "pdf" => XmpToolkitRuby::Namespaces::XMP_NS_PDF)
+        expected_date_node.content = "DUMMY_PRODUCER" if expected_date_node
+
         expect(actual_xml.to_s).to eq(expected_xml.to_s)
       end
 
@@ -97,6 +103,10 @@ RSpec.feature "As a developer, I want to an example of accessible pdf's", :chrom
 
         actual_xml = Nokogiri::XML(actual_structure, &:noblanks)
         expected_xml = Nokogiri::XML(expected_structure, &:noblanks)
+
+        [actual_xml, expected_xml].each do |xml|
+          xml.xpath('//@ID').remove
+        end
 
         expect(actual_xml.to_s).to eq(expected_xml.to_s)
       end

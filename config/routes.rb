@@ -6,6 +6,7 @@ Rails.application.routes.draw do
   get "example_async_pdf/generate", as: :example_async_pdf_generate
   get "example_async_pdf/progress/:id", to: "example_async_pdf#progress", as: :example_async_pdf_progress
   get "example_accessibility/show", as: :example_accessibility
+  get "example_encryption/show", as: :example_encryption
 
   # Reveal health status on /up that returns 200 if the app boots with no exceptions, otherwise 500.
   # Can be used by load balancers and uptime monitors to verify that the app is live.
