@@ -1,0 +1,43 @@
+<% content_for :title, "Generate a PDF with passwords" %>
+
+<div
+  class="interface-bar-bottom"
+  data-controller="pagedjs"
+  data-pagedjs-stylesheets-value="<%= ["example_encryption/print"].map { |stylesheet| asset_url(stylesheet, type: :stylesheet) }.to_json %>"
+  data-pagedjs-clear-content-value="false"
+>
+  <div data-pagedjs-target="rendered"></div>
+
+  <template data-pagedjs-target="content">
+    <div class="container my-5">
+      <div class="row justify-content-center">
+        <div class="col-md-8 col-lg-6">
+          <div class="card shadow">
+            <div class="card-header bg-primary text-white">
+              <h2 class="mb-0">PDF Encryption Example</h2>
+            </div>
+            <div class="card-body">
+              <p>
+                This example demonstrates how to generate a password-protected PDF. The PDF will require a password to
+                open
+                or modify, depending on the permissions you set.
+              </p>
+              <dl class="row">
+                <dt class="col-sm-4">Owner Password:</dt>
+                <dd class="col-sm-8"><code>password</code></dd>
+
+                <dt class="col-sm-4">User Password:</dt>
+                <dd class="col-sm-8"><code>12345678</code></dd>
+              </dl>
+              <div class="alert alert-info mt-4">
+                <strong>Note:</strong> The owner password allows full access, while the user password may restrict
+                certain
+                actions (like printing or editing).
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </template>
+</div>
