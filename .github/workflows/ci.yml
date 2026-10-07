@@ -65,13 +65,13 @@ jobs:
           bundle exec rake spec
       - name: Upload generated pdf files (if any)
         if: always()
-        uses: actions/upload-artifact@v4
+        uses: actions/upload-artifact@v6
         with:
           name: pdf-files
           path: tmp/pdf-files/
       - name: Upload logs
         if: always()
-        uses: actions/upload-artifact@v4
+        uses: actions/upload-artifact@v6
         with:
           name: logs
           include-hidden-files: true
